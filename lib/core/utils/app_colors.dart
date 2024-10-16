@@ -14,5 +14,9 @@ class AppColors {
   static const unselectDot  = Color(0xff0A41CD33);
   static const title  = Color(0xff5E22CD);
   static const des  = Color(0xff707F81B2);
+  static const Appbar1  = Color(0xff8515CD);
+  static const Appbar2  = Color(0xff701CCD);
+  static const Appbar3  = Color(0xff5028CD);
+  static const Textformfeild  = Color(0xff5E22CD);
 
 }
