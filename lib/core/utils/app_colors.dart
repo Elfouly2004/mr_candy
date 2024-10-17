@@ -18,5 +18,7 @@ class AppColors {
   static const Appbar2  = Color(0xff701CCD);
   static const Appbar3  = Color(0xff5028CD);
   static const Textformfeild  = Color(0xff5E22CD);
+  static const defaultcolor  = Color(0xff5E22CD);
+  static const grey  = Color(0xff626262);
 
 }

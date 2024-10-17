@@ -9,5 +9,10 @@ class AppTexts {
   static const String Slider_des = "هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوىل \n المقروء لصفحة ما سيلهي القارئ عن التركيز على";
   static const String Slider_Button1 = "التالي";
   static const String Slider_Button2 = "ابدا";
+  static const String No_account = "ليس لديك حساب؟";
+  static const String signup_login = " قم بإنشاء حساب";
+  static const String yes_account = "هل لديك حساب؟";
+  static const String login = " قم بتسجيل الدخول";
+  static const String choosephoto = "اضف صورة شخصية";
 
 }

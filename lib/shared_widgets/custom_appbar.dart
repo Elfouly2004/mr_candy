@@ -29,7 +29,7 @@ class Custom_Appbar extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent, // Make AppBar background transparent to show the gradient
           elevation: 0, // Remove shadow
-          toolbarHeight: MediaQuery.sizeOf(context).height * 0.2,
+          toolbarHeight: MediaQuery.sizeOf(context).height * 0.13,
           title: Center(
             child: Image(
               image: AssetImage(AppImages.AppLogo),
