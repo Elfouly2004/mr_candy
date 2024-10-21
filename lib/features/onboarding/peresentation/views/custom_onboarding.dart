@@ -166,9 +166,9 @@ class _SliderpageState extends State<Sliderpage> {
             left: 20,
             child: TextButton(
              onPressed: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
             },
-                child: Text("تخطي",style: TextStyle(fontSize: 20,color: AppColors.white),)),
+                child: Text("تخطي",style: TextStyle(fontSize: 15,color: AppColors.white),)),
           ),
 
         ],

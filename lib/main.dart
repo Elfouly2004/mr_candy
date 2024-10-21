@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
 
 import 'features/Greate_account/presentation/controller/greate_account_cubit.dart';
 import 'features/login/presentation/controller/login_cubit.dart';
@@ -12,7 +13,7 @@ void main() {
           providers: [
 
             BlocProvider<LoginCubit>(
-              create: (context) => LoginCubit(),
+              create: (context) => LoginCubit(LoginRepoImplementation()),
             ),
             BlocProvider<GreateAccountCubit>(
               create: (context) => GreateAccountCubit(),
