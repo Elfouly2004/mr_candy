@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
-import '../../Home/home.dart';
+import '../../Home/presentation/view/home.dart';
 import '../../onboarding/peresentation/views/custom_onboarding.dart';
 
 
@@ -32,7 +32,7 @@ class _splashscreenState extends State<splashscreen> {
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (C) {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-        return     Hive.box("setting").get("token")==null? Sliderpage(): Home();
+        return    Hive.box("setting").get("token")==null? Sliderpage(): Home();
 
 
 

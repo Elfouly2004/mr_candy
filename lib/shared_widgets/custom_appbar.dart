@@ -4,9 +4,11 @@ import '../core/utils/app_colors.dart';
 import '../core/utils/app_images.dart';
 
 class Custom_Appbar extends StatelessWidget {
-  Custom_Appbar({super.key, required this.widget, required this.height});
+  Custom_Appbar({super.key, required this.widget, required this.height, required this.topLeft, required this.topRight});
   final Widget widget;
   final double? height;
+  final Radius topLeft;
+  final Radius topRight;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,8 @@ class Custom_Appbar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+                  topLeft:topLeft,
+                  topRight:topRight,
                 ),
               ),
               child: widget,

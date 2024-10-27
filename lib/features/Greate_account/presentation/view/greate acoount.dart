@@ -14,7 +14,7 @@ import '../../../../shared_widgets/Button_share.dart';
 import '../../../../shared_widgets/Custom _textform field.dart';
 import '../../../../shared_widgets/custom_appbar.dart';
 import '../../../../shared_widgets/rich_text.dart';
-import '../../../Home/home.dart';
+import '../../../Home/presentation/view/home.dart';
 import '../controller/greate_account_cubit.dart';
 
 class Greate_acoount extends StatelessWidget {
@@ -47,6 +47,8 @@ class Greate_acoount extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.Appbar1),
             ),
             child: Custom_Appbar(
+              topRight: Radius.circular(40.0) ,
+              topLeft:  Radius.circular(40.0),
               height: MediaQuery.of(context).size.height * 0.8,
               widget: Padding(
                 padding: const EdgeInsets.all(20),

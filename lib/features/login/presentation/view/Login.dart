@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mrcandy/core/utils/app_texts.dart';
-import 'package:mrcandy/features/Home/home.dart';
+import 'package:mrcandy/features/Home/presentation/view/home.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../shared_widgets/Button_share.dart';
 import '../../../../shared_widgets/Custom _textform field.dart';
@@ -47,6 +47,8 @@ class Login extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.Appbar1),
             ),
             child: Custom_Appbar(
+               topLeft: Radius.circular(40.0) ,
+              topRight: Radius.circular(40.0) ,
               height: MediaQuery.of(context).size.height * 0.8,
               widget: Padding(
                 padding: const EdgeInsets.all(25),

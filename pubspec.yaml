@@ -45,6 +45,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.4
   flutter_icon_snackbar: ^1.2.1
   hive_flutter: ^1.1.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
