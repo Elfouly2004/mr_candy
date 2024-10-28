@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../../core/utils/app_colors.dart';
 import '../../../data/model/banners_model.dart';
 import '../../controller/get_banners/get_banners_cubit.dart';
 import '../../controller/get_banners/get_banners_state.dart';
 
+class BannerCarousel extends StatefulWidget {
+  @override
+  _BannerCarouselState createState() => _BannerCarouselState();
+}
 
-class BannerCarousel extends StatelessWidget {
+class _BannerCarouselState extends State<BannerCarousel> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -22,40 +30,52 @@ class BannerCarousel extends StatelessWidget {
             final banners = BannersCubit.get(context).banners;
             return banners.isEmpty
                 ? Center(child: Text("No banners available"))
-                : CarouselSlider(
-              options: CarouselOptions(height: 200.0),
-              items: banners.map((banner) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        image: DecorationImage(
-                          image: NetworkImage(banner.urlImage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          color: Colors.black54,
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            banner.category,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
+                : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200.0,
+                    autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: banners.map((banner) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          margin: EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black12,
+                            image: DecorationImage(
+                              image: NetworkImage(banner.urlImage),
+                              fit: BoxFit.cover,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     );
-                  },
-                );
-              }).toList(),
+                  }).toList(),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+
+                AnimatedSmoothIndicator(
+                  activeIndex: _currentIndex,
+                  count: banners.length,
+                  effect: ExpandingDotsEffect(
+                    dotHeight: 8.0,
+                    dotWidth: 8.0,
+                    activeDotColor: AppColors.Appbar2,
+                    dotColor: Colors.grey,
+                  ),
+                ),
+              ],
             );
           }
           return Center(child: Text("Unknown state"));

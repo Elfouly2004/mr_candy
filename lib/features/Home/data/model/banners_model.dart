@@ -2,10 +2,13 @@
 class BannersModel {
   final String urlImage;
   final int id;
-  final String category;
-  final String product;
+  final String? category;
+  final String? product;
 
-  BannersModel({required this.urlImage, required this.id, required this.category, required this.product});
+  BannersModel({required this.urlImage,
+    required this.id,
+    required this.category,
+    required this.product});
 
 Map<String, dynamic> toJson() {
     return {
