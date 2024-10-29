@@ -14,5 +14,6 @@ class AppTexts {
   static const String yes_account = "هل لديك حساب؟";
   static const String login = " قم بتسجيل الدخول";
   static const String choosephoto = "اضف صورة شخصية";
+  static const String Categories = " الاقسام ";
 
 }

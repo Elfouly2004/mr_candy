@@ -20,5 +20,6 @@ class AppColors {
   static const Textformfeild  = Color(0xff5E22CD);
   static const defaultcolor  = Color(0xff5E22CD);
   static const grey  = Color(0xff626262);
+  static const Categories  = Color(0xff6520CD);
 
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_categories.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import 'bannerCcarousel.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key, required this.topLeft, required this.topRight, this.child, this.child2});
-  final Radius topLeft;
-  final Radius topRight;
+  HomeScreen(
+      { this.child, this.child2});
+
   final Widget? child;
   final Widget? child2;
 
@@ -32,7 +33,6 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topRight,
                       end: Alignment.topLeft,
                     ),
-                    borderRadius: BorderRadius.only(topLeft: topLeft),
                   ),
                   child: child,
                 ),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          // عنصر فوق النصفين
+          //  فوق النصين
           Positioned(
             top: 210.0,
             left: 0.0,
@@ -56,6 +56,16 @@ class HomeScreen extends StatelessWidget {
               child:BannerCarousel(),
             ),
           ),
+
+          // Positioned(
+          //   top: 450.0,
+          //   left: 0.0,
+          //   right: 0.0,
+          //   child: Center(
+          //     child:   CategoriesGrid()
+          //
+          //   ),
+          // ),
         ],
       ),
     );

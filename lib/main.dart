@@ -6,6 +6,7 @@ import 'package:mrcandy/features/Home/presentation/view/home.dart';
 import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
 
 import 'features/Greate_account/presentation/controller/greate_account_cubit.dart';
+import 'features/Home/presentation/view/widgets/gridview_categories.dart';
 import 'features/login/presentation/controller/login_cubit.dart';
 import 'features/splash_screen/views/splash_screen.dart';
 
