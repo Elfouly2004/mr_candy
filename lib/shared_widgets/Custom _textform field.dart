@@ -20,7 +20,7 @@ class CustomTextformfeild extends StatelessWidget {
     return TextFormField(
       controller: controller,
       autofocus: false,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       textAlign: TextAlign.right,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();

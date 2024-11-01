@@ -13,8 +13,8 @@ class UserModel {
   final String email;
   final String phone;
   final String image;
-  final int points;
-  final int credit;
+  final int? points;
+  final int? credit;
   final String token;
 
   UserModel({

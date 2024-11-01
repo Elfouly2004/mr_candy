@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_categories.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import 'bannerCcarousel.dart';
+import '../../../../core/utils/app_colors.dart';
+import 'widgets/bannerCcarousel.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen(
-      { this.child, this.child2});
+  HomeScreen({ this.child, this.child2});
 
   final Widget? child;
   final Widget? child2;
@@ -21,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               // النصف الأول مع gradient
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -39,7 +37,7 @@ class HomeScreen extends StatelessWidget {
               ),
               // النصف الثاني بالأبيض
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(
                   color: Colors.white,
                   child: child2,
@@ -49,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           ),
           //  فوق النصين
           Positioned(
-            top: 210.0,
+            top: 160.0,
             left: 0.0,
             right: 0.0,
             child: Center(
@@ -57,15 +55,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // Positioned(
-          //   top: 450.0,
-          //   left: 0.0,
-          //   right: 0.0,
-          //   child: Center(
-          //     child:   CategoriesGrid()
-          //
-          //   ),
-          // ),
+
         ],
       ),
     );

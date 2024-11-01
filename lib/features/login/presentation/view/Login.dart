@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mrcandy/core/utils/app_texts.dart';
-import 'package:mrcandy/features/Home/presentation/view/home.dart';
+import 'package:mrcandy/features/Home/presentation/view/widgets/home.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../shared_widgets/Button_share.dart';
 import '../../../../shared_widgets/Custom _textform field.dart';

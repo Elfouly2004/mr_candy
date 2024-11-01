@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mrcandy/core/utils/app_colors.dart';
 
 import '../../controller/get_categories/get_categories_cubit.dart';
 import '../../controller/get_categories/get_categories_state.dart';
@@ -24,7 +25,7 @@ class CategoriesGrid extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
+                  mainAxisSpacing: 15.0,
                   childAspectRatio: 1.2,
                 ),
                 itemCount: categories.length,
@@ -38,11 +39,15 @@ class CategoriesGrid extends StatelessWidget {
                       width: 98,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                      color: Colors.white60
+                      color: Colors.white60,
                       ),
                       child: Center(
                         child: Column(
+
                           children: [
+
+                            SizedBox(height: 2),
+
                             Expanded(
                               child: Image.network(
                                 category.urlImage,
@@ -56,7 +61,8 @@ class CategoriesGrid extends StatelessWidget {
 
                             Text(
                               category.name,
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 16,
+                                  fontWeight: FontWeight.w600,color: Colors.black),
                             ),
                           ],
                         ),

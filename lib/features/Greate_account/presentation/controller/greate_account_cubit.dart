@@ -47,6 +47,7 @@ class GreateAccountCubit extends Cubit<GreateAccountState> {
     emit(GreateAccountLoadingState());
 
 
+      debugPrint("Loading Cubit");
     try {
       String? base64String;
       if (myPhoto != null) {
@@ -71,6 +72,7 @@ class GreateAccountCubit extends Cubit<GreateAccountState> {
         emit(GreateAccountFailureState(errorMessage: "Please choose a photo."));
       } else{
                 // Proceed with account creation if all fields are valid
+        debugPrint("function is read ");
         var result = await greateAccountRepo.Greate_account(
           userModelToRegister: UserModelToRegister(
             name: Name.text.trim(),
@@ -82,22 +84,21 @@ class GreateAccountCubit extends Cubit<GreateAccountState> {
         );
 
 
-        emit(GreateAccountfinish());
-
         result.fold((left) {
-          // print("Error: ${left.message}");
+          print("Error: ${left.message}");
           emit(GreateAccountFailureState(errorMessage: left.message));
         }, (right)async {
-
+          debugPrint("Success");
           var box = Hive.box("setting");
           await box.put("token", right.token);
+          debugPrint("Token app : ${box.get("token")}");
 
           emit(GreateAccountSuccessState(userModel: right));
         });
       }
 
     } catch (e) {
-      print("Exception: $e"); // Catch and print any exception
+      print("Exception: $e"); // Catch and print any excpteption
     }
   }
 

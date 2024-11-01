@@ -41,7 +41,7 @@ class  GreateAccountImpelemntation implements GreateAccountRepo{
       return left(NoInternetFailure(message: "No Internet"));
     }
     catch(e) {
-      return left(ApiFailure(message: "Error Occurred"));
+      return left(ApiFailure(message: e.toString()));
     }
 
   }

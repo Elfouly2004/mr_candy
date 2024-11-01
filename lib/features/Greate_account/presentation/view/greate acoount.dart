@@ -14,7 +14,7 @@ import '../../../../shared_widgets/Button_share.dart';
 import '../../../../shared_widgets/Custom _textform field.dart';
 import '../../../../shared_widgets/custom_appbar.dart';
 import '../../../../shared_widgets/rich_text.dart';
-import '../../../Home/presentation/view/home.dart';
+import '../../../Home/presentation/view/widgets/home.dart';
 import '../controller/greate_account_cubit.dart';
 
 class Greate_acoount extends StatelessWidget {
@@ -26,7 +26,7 @@ class Greate_acoount extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<GreateAccountCubit,GreateAccountState>(
         listener: (context, state) {
-          if (state is GreateAccountfinish) {
+          if (state is GreateAccountSuccessState) {
             Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
           } else if (state is GreateAccountFailureState) {
             IconSnackBar.show(
@@ -239,9 +239,11 @@ class Greate_acoount extends StatelessWidget {
 
                     ButtonShare(
                       data: "انشاء الحساب ",
-                      onTap: () {
-                        BlocProvider.of<GreateAccountCubit>(context).Greateacoount();
-                      },
+                      onTap: ()async {
+                        debugPrint("Mohamed before");
+                        await BlocProvider.of<GreateAccountCubit>(context).Greateacoount();
+                        debugPrint("Mohamed after");
+                        },
                     ),
 
                     Rich_Text(
