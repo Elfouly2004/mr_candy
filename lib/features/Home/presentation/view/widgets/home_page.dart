@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   AppTexts.Categories,
                   style: TextStyle(
                     color: AppColors.Categories,
@@ -52,6 +52,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+
 
             Expanded(child: CategoriesGrid()),
 

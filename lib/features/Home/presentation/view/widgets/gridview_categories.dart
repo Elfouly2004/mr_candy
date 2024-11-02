@@ -39,7 +39,7 @@ class CategoriesGrid extends StatelessWidget {
                       width: 98,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                      color: Colors.white60,
+                      color: Colors.white54,
                       ),
                       child: Center(
                         child: Column(

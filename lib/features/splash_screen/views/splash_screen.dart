@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home_page.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
+import '../../Home/presentation/view/home_screen.dart';
 import '../../Home/presentation/view/widgets/home.dart';
 import '../../onboarding/peresentation/views/custom_onboarding.dart';
 
@@ -33,7 +34,7 @@ class _splashscreenState extends State<splashscreen> {
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (C) {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-        return Hive.box("setting").get("token")==null? Sliderpage(): HomePage();
+        return Hive.box("setting").get("token")==null? Sliderpage(): Home();
 
 
 
