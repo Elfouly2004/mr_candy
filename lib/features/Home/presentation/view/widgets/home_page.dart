@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_product.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_images.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
 
-          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
           Center(
             child: Image(
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
 
-            SizedBox(height: MediaQuery.of(context).size.height * 0.19),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.11),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -54,7 +55,28 @@ class HomePage extends StatelessWidget {
             ),
 
 
-            Expanded(child: CategoriesGrid()),
+            Expanded(
+                flex:4,
+                child: CategoriesGrid()),
+
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text(
+                  AppTexts.buy,
+                  style: TextStyle(
+                    color: AppColors.Categories,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+
+            Expanded(
+                flex:2,
+                child: ProductsGrid()),
 
           ],),
       ),

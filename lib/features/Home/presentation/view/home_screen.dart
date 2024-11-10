@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           ),
           //  فوق النصين
           Positioned(
-            top: 160.0,
+            top: MediaQuery.of(context).size.height * 0.18,
             left: 0.0,
             right: 0.0,
             child: Center(

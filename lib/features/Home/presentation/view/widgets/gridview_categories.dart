@@ -20,26 +20,27 @@ class CategoriesGrid extends StatelessWidget {
             final categories = context.read<CategoriesCubit>().categories_lst;
 
             return GridView.builder(
-                shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 15.0,
-                  childAspectRatio: 1.2,
+                  childAspectRatio: 1.7
                 ),
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   final category = categories[index];
                   return GestureDetector(
                     onTap: () {
+
+
+
                     },
                     child: Container(
-                      height: 98,
-                      width: 98,
+
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                      color: Colors.white54,
+                        borderRadius: BorderRadius.circular(15),
+                         color: Colors.white54,
                       ),
                       child: Center(
                         child: Column(

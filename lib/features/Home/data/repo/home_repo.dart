@@ -3,6 +3,7 @@ import 'package:mrcandy/features/Home/data/model/categories_model.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../model/banners_model.dart';
+import '../model/product_model.dart';
 
 abstract class HomeRepo {
 
@@ -11,6 +12,9 @@ abstract class HomeRepo {
 
 
   Future<Either<Failure,List<CategoriesModel>>> get_categories();
+
+
+  Future<Either<Failure,List<ProductModel>>> get_product();
 
 
 

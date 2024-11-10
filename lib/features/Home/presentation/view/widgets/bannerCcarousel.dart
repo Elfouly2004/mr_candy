@@ -31,8 +31,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
             return banners.isEmpty
                 ? Center(child: Text("No banners available"))
                 : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+                 mainAxisSize: MainAxisSize.min,
+                 children: [
                 CarouselSlider(
                   options: CarouselOptions(
                     height: 200.0,
@@ -47,8 +47,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.15,
                           margin: EdgeInsets.symmetric(horizontal: 10.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -63,7 +63,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
                 AnimatedSmoothIndicator(
                   activeIndex: _currentIndex,

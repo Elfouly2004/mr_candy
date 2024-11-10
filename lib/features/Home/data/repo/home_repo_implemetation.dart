@@ -6,6 +6,7 @@ import 'package:mrcandy/features/Home/data/model/categories_model.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/utils/endpoints.dart';
 import '../model/banners_model.dart';
+import '../model/product_model.dart';
 import 'home_repo.dart';
 
 class HomeRepoImplementation implements HomeRepo {
@@ -75,6 +76,46 @@ class HomeRepoImplementation implements HomeRepo {
       return left(ApiFailure(message: "Error Occurred"));
     }
   }
+
+
+
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> get_product() async {
+    List<ProductModel> productList = [];
+
+    try {
+      final response = await http.get(Uri.parse(EndPoints.baseUrl + EndPoints.home));
+
+      if (response.statusCode == 200) {
+
+        final body = jsonDecode(response.body);
+        print('Response data: ${body["data"]["products"]}');
+
+        if (body["status"] == true) {
+          // Adjust this part based on the printed structure
+          for (var product in body["data"]["products"]) {
+            productList.add(ProductModel.fromJson(product));
+          }
+          return right(productList);
+        } else {
+          return left(ApiFailure(message: body["message"]));
+        }
+      } else {
+        return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
+      }
+    } on SocketException {
+      return left(NoInternetFailure(message: "No Internet"));
+    } catch (e) {
+      print('Error occurred: $e');  // Print the error for debugging
+      return left(ApiFailure(message: "Error Occurred"));
+    }
+  }
+
+
+
+
+
 
 
   }

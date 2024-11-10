@@ -23,6 +23,8 @@ class AppColors {
   static const Categories  = Color(0xff6520CD);
   static const bottom_g1  = Color(0xff1A48BF);
   static const bottom_g2  = Color(0xff731BCD);
+  static const gridproduct  = Color(0xffF2F5FC);
+
 
 
 }

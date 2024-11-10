@@ -15,5 +15,6 @@ class AppTexts {
   static const String login = " قم بتسجيل الدخول";
   static const String choosephoto = "اضف صورة شخصية";
   static const String Categories = " الاقسام ";
+  static const String buy = "الاكثر مبيعا";
 
 }
