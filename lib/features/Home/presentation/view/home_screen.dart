@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
                   child: child,
                 ),
               ),
+              
               // النصف الثاني بالأبيض
               Expanded(
                 flex: 3,

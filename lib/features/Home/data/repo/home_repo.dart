@@ -17,6 +17,9 @@ abstract class HomeRepo {
   Future<Either<Failure,List<ProductModel>>> get_product();
 
 
+  Future<Either<Failure,List<ProductModel>>> get_Gatgories();
+
+
 
 
 }

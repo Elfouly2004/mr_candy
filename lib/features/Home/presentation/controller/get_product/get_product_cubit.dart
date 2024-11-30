@@ -9,6 +9,8 @@ class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit() : super(ProductsInitialState());
 
   final HomeRepoImplementation homeRepo = HomeRepoImplementation();
+
+  // قائمة المنتجات التي سيتم تعبئتها بالبيانات بعد جلبها
   List<ProductModel> productList = [];
 
   // Static method for accessing the cubit instance easily
@@ -19,16 +21,12 @@ class ProductsCubit extends Cubit<ProductsState> {
 
     final result = await homeRepo.get_product();
     result.fold((failure) {
-      print("Error fetching banners: ${failure.message}");
-
+      print("Error fetching products: ${failure.message}");
       emit(ProductsFailureState(errorMessage: failure.message));
     }, (data) {
-      productList = data;
-      print("Fetched banners: $productList");  // Debug output
+      productList = data;  // تعبئة productList بالبيانات المأخوذة من الريبو
+      print("Fetched products: $productList");  // Debug output
       emit(ProductsSuccessState(productList));
-    },
-    );
+    });
   }
-
-
 }

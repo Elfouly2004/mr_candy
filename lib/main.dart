@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mrcandy/features/Greate_account/data/repo/Greate_account_impelemntation.dart';
+import 'package:mrcandy/features/Home/presentation/view/home_screen.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home.dart';
+import 'package:mrcandy/features/Home/presentation/view/widgets/home_page.dart';
 import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
 
 import 'features/Greate_account/presentation/controller/greate_account_cubit.dart';
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mr Candy',
-      home: splashscreen(),
+      home: Home(),
     );
   }
 }

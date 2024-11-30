@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mrcandy/core/utils/app_colors.dart';
 
+import '../../../../Category/presentation/view/category_screen.dart';
 import '../../controller/get_categories/get_categories_cubit.dart';
 import '../../controller/get_categories/get_categories_state.dart';
 
@@ -33,7 +34,9 @@ class CategoriesGrid extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
 
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(
 
+                  ),));
 
                     },
                     child: Container(
