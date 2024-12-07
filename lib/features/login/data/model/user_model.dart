@@ -1,20 +1,11 @@
 class UserModel {
-  // "id": 67447,
-  // "name": "Abdelrahman ALgazzar",
-  // "email": "ebrahim01123166536@gmail.com",
-  // "phone": "01123166536",
-  // "image": "https://student.valuxapps.com/storage/uploads/users/ZqizRMkKQh_1728637250.jpeg",
-  // "points": 0,
-  // "credit": 0,
-  // "token": "xnKnwxuih66lB0vyEN3uOayuXEkD9yrvSwHGx05K1lHRvP0RfBJUUG4fKcyFBg1cMPZUPq"
-
   final int id;
   final String name;
   final String email;
   final String phone;
   final String image;
-  final int? points;
-  final int? credit;
+  final int points;
+  final int credit;
   final String token;
 
   UserModel({
@@ -28,7 +19,31 @@ class UserModel {
     required this.token,
   });
 
+  // Factory method to parse JSON into UserModel
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      image: json['image'] as String,
+      points: json['points'] ?? 0,
+      credit: json['credit'] ?? 0,
+      token: json['token'] as String,
+    );
+  }
 
-
-
+  // Method to convert UserModel to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'image': image,
+      'points': points,
+      'credit': credit,
+      'token': token,
+    };
+  }
 }

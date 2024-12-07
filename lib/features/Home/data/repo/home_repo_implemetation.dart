@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:http/http.dart' as http;
 import 'package:mrcandy/features/Home/data/model/categories_model.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/utils/endpoints.dart';
+import '../../presentation/controller/get_product/get_product_cubit.dart';
 import '../model/banners_model.dart';
 import '../model/product_model.dart';
 import 'home_repo.dart';
@@ -78,18 +81,21 @@ class HomeRepoImplementation implements HomeRepo {
   Future<Either<Failure, List<ProductModel>>> get_product() async {
     try {
       final response = await http.get(Uri.parse(EndPoints.baseUrl + EndPoints.home));
+
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
-        print('Response data: ${body["data"]["products"]}');
+        print('Response data: ${body["data"]["data"]}');
 
         if (body["status"] == true) {
-          productList = []; // تأكد من تفريغ القائمة قبل ملئها
-          for (var product in body["data"]["products"]) {
+          productList = []; // Clear the list before populating it
+
+          // Iterate over body["data"]["products"] instead of body["data"]
+          for (var product in body["data"]["data"]) {
             productList.add(ProductModel.fromJson(product));
           }
           return right(productList);
         } else {
-          return left(ApiFailure(message: body["message"]));
+          return left(ApiFailure(message: body["message"] ?? "Unknown error occurred"));
         }
       } else {
         return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
@@ -97,10 +103,11 @@ class HomeRepoImplementation implements HomeRepo {
     } on SocketException {
       return left(NoInternetFailure(message: "No Internet"));
     } catch (e) {
-      print('Error occurred: $e');  // Print the error for debugging
+      print('Error occurred: $e'); // Print the error for debugging
       return left(ApiFailure(message: "Error Occurred"));
     }
   }
+
 
 
   @override
@@ -130,4 +137,102 @@ class HomeRepoImplementation implements HomeRepo {
       return left(ApiFailure(message: "Error Occurred"));
     }
   }
+
+  @override
+
+  Future<Either<Failure, ProductModel>> Addfav({context,index}) async {
+
+    print("tttttttttttttt is ${Hive.box("setting").get("token")}");
+    final token = Hive.box("setting").get("token");
+    if (token == null || token.isEmpty) {
+      print("Error: Token is missing or invalid");
+      return left(ApiFailure(message: "Authentication token is missing."));
+    }
+
+
+    try {
+      final Map<String, dynamic> body = {"product_id":BlocProvider.of<ProductsCubit>(context).productList[index].id};
+      // Define the request body
+      final response = await http.post(
+        Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
+          headers: {
+            "lang":"ar",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",  // تأكد أن هذا التوكن صحيح
+          },
+
+        body: jsonEncode(body),
+      );
+
+print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[index].id}");
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        if (responseBody["status"] == true) {
+          // طلب ناجح
+          final productData = responseBody["data"]["product"];
+          final productModel = ProductModel.fromJson(productData);
+          return right(productModel);
+        } else {
+          // فشل بسبب عدم التصريح
+          return left(ApiFailure(message: responseBody["message"] ?? "Failed to add to favorites"));
+        }
+      } else {
+        return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
+      }
+    } on SocketException {
+      return left(NoInternetFailure(message: "No Internet"));
+    } catch (e) {
+      print('Error occurred: $e'); // Debugging log
+      return left(ApiFailure(message: "Error Occurred"));
+    }
+  }
+
+
+  @override
+  List<ProductModel> favlist = [];
+
+
+  Future<Either<Failure, List<ProductModel>>> getfav() async {
+
+
+    final token = Hive.box("setting").get("token");
+
+
+    try {
+      final response = await http.get(Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
+        headers: {
+        "lang":"ar",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",  // تأكد أن هذا التوكن صحيح
+      },
+
+
+
+
+      );
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        print('Response data: ${body["data"]}');
+
+        if (body["status"] == true) {
+          favlist = []; // تأكد من تفريغ القائمة قبل ملئها
+          for (var product in body["data"]["data"]) {
+            favlist.add(ProductModel.fromJson(product));
+          }
+          return right(favlist);
+        } else {
+          return left(ApiFailure(message: body["message"]));
+        }
+      } else {
+        return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
+      }
+    } on SocketException {
+      return left(NoInternetFailure(message: "No Internet"));
+    } catch (e) {
+      print('Error occurred: $e');  // Print the error for debugging
+      return left(ApiFailure(message: "Error Occurred"));
+    }
+  }
+
+
 }

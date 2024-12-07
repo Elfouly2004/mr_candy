@@ -47,7 +47,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
+                          width: MediaQuery.of(context).size.width * 0.9,
                           height: MediaQuery.of(context).size.height * 0.15,
                           margin: EdgeInsets.symmetric(horizontal: 10.0),
                           decoration: BoxDecoration(

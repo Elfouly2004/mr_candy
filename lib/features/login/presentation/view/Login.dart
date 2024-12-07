@@ -85,9 +85,11 @@ class Login extends StatelessWidget {
                       ),
                       hintText: "    ادخل البريد الالكتروني",
                     ),
+
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
+
                     CustomTextformfeild(
                       keyboardType: TextInputType.visiblePassword,
                       controller: BlocProvider.of<LoginCubit>(context).password,
@@ -116,15 +118,18 @@ class Login extends StatelessWidget {
                       ),
                       hintText: " ادخل كلمة المرور",
                     ),
+
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
+
                     ButtonShare(
                       data: "تسجيل الدخول",
                       onTap: () {
                         BlocProvider.of<LoginCubit>(context).login();
                       },
                     ),
+
                     Rich_Text(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Greate_acoount()));

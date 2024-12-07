@@ -27,8 +27,14 @@ class Greate_acoount extends StatelessWidget {
       body: BlocConsumer<GreateAccountCubit,GreateAccountState>(
         listener: (context, state) {
           if (state is GreateAccountSuccessState) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-          } else if (state is GreateAccountFailureState) {
+            debugPrint("Account created successfully"); // إضافة رسالة للتأكد من الوصول إلى هذه الحالة
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => Login()),
+            );
+          }
+             else if (state is GreateAccountFailureState) {
+            // Show failure alert
             IconSnackBar.show(
               context,
               snackBarType: SnackBarType.alert,
@@ -39,6 +45,7 @@ class Greate_acoount extends StatelessWidget {
               maxLines: 2,
             );
           }
+
         },
         builder:(context, state) {
           return  ModalProgressHUD(
@@ -241,7 +248,7 @@ class Greate_acoount extends StatelessWidget {
                       data: "انشاء الحساب ",
                       onTap: ()async {
                         debugPrint("Mohamed before");
-                        await BlocProvider.of<GreateAccountCubit>(context).Greateacoount();
+                     BlocProvider.of<GreateAccountCubit>(context).Greateacoount(context);
                         debugPrint("Mohamed after");
                         },
                     ),

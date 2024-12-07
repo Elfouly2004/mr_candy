@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart';
 import '../../../login/data/model/user_model.dart';
 abstract class GreateAccountRepo {
 
-  Future<Either<Failure , UserModel>> Greate_account(
+  Future<Either<Failure , UserModelToRegister>> Greate_account(
       {
         required UserModelToRegister userModelToRegister
 

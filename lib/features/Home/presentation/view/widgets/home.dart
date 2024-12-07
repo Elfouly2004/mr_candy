@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
 
   List<Widget> screens  = [
     HomePage(),
-    FavPage(),
+    FavoritesPage(),
     BagPage(),
     SettingPage()
 

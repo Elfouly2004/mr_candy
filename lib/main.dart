@@ -6,6 +6,7 @@ import 'package:mrcandy/features/Home/presentation/view/home_screen.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home_page.dart';
 import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
+import 'package:mrcandy/features/login/presentation/view/Login.dart';
 
 import 'features/Greate_account/presentation/controller/greate_account_cubit.dart';
 import 'features/Home/presentation/view/widgets/gridview_categories.dart';
@@ -28,7 +29,7 @@ void main() async {
               create: (context) => LoginCubit(LoginRepoImplementation()),
             ),
             BlocProvider<GreateAccountCubit>(
-              create: (context) => GreateAccountCubit(GreateAccountImpelemntation()),
+              create: (context) => GreateAccountCubit(GreateAccountImplementation()),
             ),
 
           ],
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mr Candy',
-      home: Home(),
+      home: splashscreen(),
     );
   }
 }

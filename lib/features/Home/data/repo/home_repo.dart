@@ -20,6 +20,13 @@ abstract class HomeRepo {
   Future<Either<Failure,List<ProductModel>>> get_Gatgories();
 
 
+  Future<Either<Failure, ProductModel>> Addfav();
+
+
+  Future<Either<Failure, List<ProductModel>>> getfav();
+
+
+
 
 
 }

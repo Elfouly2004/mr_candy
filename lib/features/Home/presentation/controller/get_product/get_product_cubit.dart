@@ -29,4 +29,25 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsSuccessState(productList));
     });
   }
+
+
+
+  Future<void> addFavorite(context, index) async {
+    final result = await homeRepo.Addfav(context: context, index: index);
+    result.fold(
+          (failure) {
+        print("Error adding to favorites: ${failure.message}");
+        emit(ProductsFailureState(errorMessage: failure.message));
+      },
+          (product) {
+        print("Product added to favorites: $product");
+
+
+        productList[index] = product;
+        emit(AddFavoriteSuccessState(product)); // إصدار حالة النجاح
+      },
+    );
+  }
+
+
 }
