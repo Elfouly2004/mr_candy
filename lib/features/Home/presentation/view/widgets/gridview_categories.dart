@@ -36,6 +36,7 @@ class CategoriesGrid extends StatelessWidget {
 
                   Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(
                     title: category.name,
+                    id: category.id,
                   ),));
 
                     },

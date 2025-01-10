@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mrcandy/features/Category/presentation/view/widgets/gatgories_grid.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../Home/presentation/view/widgets/gridview_product.dart';
 
 class CategoryScreen extends StatelessWidget {
-  CategoryScreen({required this.title});
+  CategoryScreen({required this.title, required this.id});
 
   final String title;
-
+final int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +62,11 @@ class CategoryScreen extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
+
+            Expanded(child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: GatgoriesGrid(categoryId: id,),
+            ))
           ],
         ),
       ),
