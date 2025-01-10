@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../controller/get_product/get_product_cubit.dart';
 import '../../controller/get_product/get_product_state.dart';
@@ -46,8 +47,8 @@ class _ProductsGridState extends State<ProductsGrid> {
                               children: [
                                 // Background Container
                                 Container(
-                                  height: screenHeight * 23, // نسبة مئوية من الشاشة
-                                  width: screenWidth * 2,  // نسبة مئوية من الشاشة
+                                  height: 156.h, // نسبة مئوية من الشاشة
+                                  width: 180.w,  // نسبة مئوية من الشاشة
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     color: AppColors.gridproduct,
@@ -55,8 +56,8 @@ class _ProductsGridState extends State<ProductsGrid> {
                                   child: Center(
                                     child: Image.network(
                                       product.image,
-                                      height: screenHeight * 0.5,
-                                      width: screenWidth * 0.5,
+                                      height: 100.h,
+                                      width: 100.w,
                                       fit: BoxFit.fill,
                                       errorBuilder: (context, error, stackTrace) {
                                         return const Icon(Icons.broken_image);
@@ -67,7 +68,7 @@ class _ProductsGridState extends State<ProductsGrid> {
 
                                 // Positioned Row for Product Details
                                 Positioned(
-                                  top: screenHeight * 0.76, // ديناميكي بالنسبة إلى الشاشة
+                                  top: 160.h, // ديناميكي بالنسبة إلى الشاشة
                                   left: 0,
                                   right: 0,
                                   child: Row(
@@ -118,27 +119,51 @@ class _ProductsGridState extends State<ProductsGrid> {
 
                                 // Favorite Button
                                 Align(
-                                  alignment: AlignmentDirectional.topEnd,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        BlocProvider.of<ProductsCubit>(context).addFavorite(context, index);
-                                        BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites =
-                                        !BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites;
+                                  alignment: AlignmentDirectional.topCenter,
+                                  child:Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 3),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+
+                                        Container(
+                                          width: MediaQuery.sizeOf(context).width*0.09,
+                                          height: MediaQuery.sizeOf(context).height*0.022,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.title,
+                                            borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child: Text(" -${product.discount}%" ,style: TextStyle(
+                                            color: AppColors.white,
+                                            fontWeight: FontWeight.w500
+
+                                          ),),
+                                        ),
+
+                                        GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              BlocProvider.of<ProductsCubit>(context).addFavorite(context, index);
+                                              BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites =
+                                              !BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites;
 
 
-                                      });
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: AppColors.white,
-                                      child: Icon(
-                                        BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: AppColors.defaultcolor,
-                                      ),
+                                            });
+                                          },
+                                          child: CircleAvatar(
+                                            backgroundColor: AppColors.white,
+                                            child: Icon(
+                                              BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_border,
+                                              color: AppColors.defaultcolor,
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
                                     ),
-                                  ),
+                                  )
                                 ),
                               ],
                             );

@@ -139,7 +139,6 @@ class HomeRepoImplementation implements HomeRepo {
   }
 
   @override
-
   Future<Either<Failure, ProductModel>> Addfav({context,index}) async {
 
     print("tttttttttttttt is ${Hive.box("setting").get("token")}");
@@ -151,20 +150,23 @@ class HomeRepoImplementation implements HomeRepo {
 
 
     try {
-      final Map<String, dynamic> body = {"product_id":BlocProvider.of<ProductsCubit>(context).productList[index].id};
+      final Map<String, dynamic> body =
+      {"product_id":
+      BlocProvider.of<ProductsCubit>(context).productList[index].id.toString()};
       // Define the request body
       final response = await http.post(
         Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
           headers: {
-            "lang":"ar",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer $token",  // تأكد أن هذا التوكن صحيح
+            "Authorization": "$token",  // تأكد أن هذا التوكن صحيح
           },
+          body: body
 
-        body: jsonEncode(body),
       );
 
+      print("RRRRRRRRRRRRRRRRRR     ${response.body}");
+
 print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[index].id}");
+
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
         if (responseBody["status"] == true) {
@@ -172,6 +174,8 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
           final productData = responseBody["data"]["product"];
           final productModel = ProductModel.fromJson(productData);
           return right(productModel);
+
+
         } else {
           // فشل بسبب عدم التصريح
           return left(ApiFailure(message: responseBody["message"] ?? "Failed to add to favorites"));
@@ -187,13 +191,11 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
     }
   }
 
-
   @override
-  List<ProductModel> favlist = [];
-
 
   Future<Either<Failure, List<ProductModel>>> getfav() async {
 
+    List<ProductModel> favlist = [];
 
     final token = Hive.box("setting").get("token");
 
@@ -201,17 +203,16 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
     try {
       final response = await http.get(Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
         headers: {
-        "lang":"ar",
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",  // تأكد أن هذا التوكن صحيح
+        "Authorization": "$token",  // تأكد أن هذا التوكن صحيح
       },
-
 
 
 
       );
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
+
+
         print('Response data: ${body["data"]}');
 
         if (body["status"] == true) {

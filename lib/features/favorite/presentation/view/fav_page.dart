@@ -36,13 +36,15 @@ class FavoritesPage extends StatelessWidget {
                   final product = favorites[index];
                   return Card(
                     child: ListTile(
-                      leading: Image.network(
+                      leading: product.image != null && product.image.isNotEmpty
+                          ? Image.network(
                         product.image,
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
-                      ),
-                      title: Text(product.name),
+                      )
+                          : Icon(Icons.image_not_supported),
+                      title: Text(product.name ?? "No Name"),
                       subtitle: Text("${product.price} جنيه"),
                     ),
                   );

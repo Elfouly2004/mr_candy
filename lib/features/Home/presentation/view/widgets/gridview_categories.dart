@@ -35,7 +35,7 @@ class CategoriesGrid extends StatelessWidget {
                     onTap: () {
 
                   Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(
-
+                    title: category.name,
                   ),));
 
                     },
@@ -49,6 +49,8 @@ class CategoriesGrid extends StatelessWidget {
                         child: Column(
 
                           children: [
+
+
 
                             SizedBox(height: 2),
 
