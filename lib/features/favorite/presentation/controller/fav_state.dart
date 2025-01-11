@@ -1,5 +1,5 @@
 
-import '../../Home/data/model/product_model.dart';
+import '../../../Home/data/model/product_model.dart';
 
 abstract class FavoritesState {}
 

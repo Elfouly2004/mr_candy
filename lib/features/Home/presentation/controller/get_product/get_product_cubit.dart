@@ -12,8 +12,10 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   // قائمة المنتجات التي سيتم تعبئتها بالبيانات بعد جلبها
   List<ProductModel> productList = [];
+  int index1 =0;
+   Map<int,List<ProductModel>> map_forproducts={};
 
-  // Static method for accessing the cubit instance easily
+
   static ProductsCubit get(context) => BlocProvider.of(context);
 
   Future<void> fetchproducts() async {
@@ -23,17 +25,18 @@ class ProductsCubit extends Cubit<ProductsState> {
     result.fold((failure) {
       print("Error fetching products: ${failure.message}");
       emit(ProductsFailureState(errorMessage: failure.message));
-    }, (data) {
-      productList = data;  // تعبئة productList بالبيانات المأخوذة من الريبو
+    }, (right) {
+      productList = right;
+      map_forproducts.addAll({
+        index1:productList
+      });
       print("Fetched products: $productList");  // Debug output
       emit(ProductsSuccessState(productList));
     });
   }
 
 
-
-  Future<void> addFavorite(context, index) async {
-
+  Future<void> addFavorite(context, int index) async {
     final result = await homeRepo.Addfav(context: context, index: index);
 
     result.fold(
@@ -47,9 +50,8 @@ class ProductsCubit extends Cubit<ProductsState> {
         // تحديث المنتج في القائمة المحلية
         productList[index] = updatedProduct;
 
-        // إصدار حالة النجاح مع القائمة الجديدة
-        emit(AddFavoriteSuccessState(updatedProduct));
-        emit(ProductsSuccessState(productList)); // تحديث كامل للواجهة إذا كانت تعتمد على القائمة
+        // إصدار حالة النجاح مع قائمة جديدة لضمان إعادة البناء
+        emit(ProductsSuccessState(List.from(productList)));
       },
     );
   }

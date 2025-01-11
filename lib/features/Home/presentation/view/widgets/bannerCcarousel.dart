@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -35,7 +36,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                  children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: 200.0,
+                    height: 180.h,
                     autoPlay: true,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -47,15 +48,15 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          margin: EdgeInsets.symmetric(horizontal: 10.0),
+                          width: 300.w,
+                          height:100.h,
+                          margin: const  EdgeInsets.symmetric(horizontal: 15.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.black12,
                             image: DecorationImage(
                               image: NetworkImage(banner.urlImage),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                           ),
                         );
@@ -63,7 +64,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                SizedBox(height: 15.h),
 
                 AnimatedSmoothIndicator(
                   activeIndex: _currentIndex,

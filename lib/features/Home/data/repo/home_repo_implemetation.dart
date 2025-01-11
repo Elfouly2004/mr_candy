@@ -151,8 +151,7 @@ class HomeRepoImplementation implements HomeRepo {
 
     try {
       final Map<String, dynamic> body =
-      {"product_id":
-      BlocProvider.of<ProductsCubit>(context).productList[index].id.toString()};
+      {"product_id": BlocProvider.of<ProductsCubit>(context).productList[index].id.toString()};
       // Define the request body
       final response = await http.post(
         Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
@@ -194,35 +193,35 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
   @override
 
   Future<Either<Failure, List<ProductModel>>> getfav() async {
-
     List<ProductModel> favlist = [];
-
     final token = Hive.box("setting").get("token");
 
-
     try {
-      final response = await http.get(Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
+      final response = await http.get(
+        Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
         headers: {
-        "Authorization": "$token",  // تأكد أن هذا التوكن صحيح
-      },
-
-
-
+          "Authorization": "$token",
+        },
       );
+
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
-
 
         print('Response data: ${body["data"]}');
 
         if (body["status"] == true) {
-          favlist = []; // تأكد من تفريغ القائمة قبل ملئها
-          for (var product in body["data"]["data"]) {
-            favlist.add(ProductModel.fromJson(product));
+          favlist = [];
+          for (var favoriteItem in body["data"]["data"]) {
+            try {
+              final productJson = favoriteItem["product"];
+              favlist.add(ProductModel.fromJson(productJson));
+            } catch (e) {
+              print("Error processing product: $e");
+            }
           }
           return right(favlist);
         } else {
-          return left(ApiFailure(message: body["message"]));
+          return left(ApiFailure(message: body["message"] ?? "Unknown error"));
         }
       } else {
         return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
@@ -230,7 +229,7 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
     } on SocketException {
       return left(NoInternetFailure(message: "No Internet"));
     } catch (e) {
-      print('Error occurred: $e');  // Print the error for debugging
+      print('Error occurred: $e'); // Print the error for debugging
       return left(ApiFailure(message: "Error Occurred"));
     }
   }

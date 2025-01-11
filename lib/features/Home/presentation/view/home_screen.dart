@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import 'widgets/bannerCcarousel.dart';
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               
               // النصف الثاني بالأبيض
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Container(
                   color: Colors.white,
                   child: child2,
@@ -48,7 +49,7 @@ class HomeScreen extends StatelessWidget {
           ),
           //  فوق النصين
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.18,
+            top: 180.h,
             left: 0.0,
             right: 0.0,
             child: Center(

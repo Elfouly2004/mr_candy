@@ -27,117 +27,134 @@ class _ProductsGridState extends State<ProductsGrid> {
             return SafeArea(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [GridView.builder(
+                  children: [
+                    GridView.builder(
                       shrinkWrap: true, // يمنع GridView من التمدد بلا حدود
                       physics: const NeverScrollableScrollPhysics(), // تعطيل التمرير داخل GridView
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 20.0,
-                        mainAxisSpacing: 20.0,
+                        mainAxisSpacing: 20,
                       ),
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         final product = products[index];
                         return  LayoutBuilder(
                           builder: (context, constraints) {
-                            final screenHeight = constraints.maxHeight;
-                            final screenWidth = constraints.maxWidth;
 
                             return Stack(
                               children: [
                                 // Background Container
                                 Container(
-                                  height: 156.h, // نسبة مئوية من الشاشة
-                                  width: 180.w,  // نسبة مئوية من الشاشة
+                                  height: 200.h, // نسبة مئوية من الشاشة
+                                  width: 153.w,  // نسبة مئوية من الشاشة
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: AppColors.gridproduct,
+                                    color: AppColors.white,
                                   ),
-                                  child: Center(
-                                    child: Image.network(
-                                      product.image,
-                                      height: 100.h,
-                                      width: 100.w,
-                                      fit: BoxFit.fill,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return const Icon(Icons.broken_image);
-                                      },
-                                    ),
-                                  ),
-                                ),
-
-                                // Positioned Row for Product Details
-                                Positioned(
-                                  top: 160.h, // ديناميكي بالنسبة إلى الشاشة
-                                  left: 0,
-                                  right: 0,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      // Add Button
-                                      Container(
-                                        height: screenHeight * 0.15,
-                                        width: screenWidth * 0.15,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.defaultcolor,
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.add,
-                                            size: 20,
-                                            color: AppColors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      // Product Details
+                                  child:
                                       Column(
                                         children: [
-                                          Text(
-                                            product.name.split(" ").join("\n"),
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black,
+
+                                          Container(
+                                            height: 155.h,
+                                            width: 153.w,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.gridproduct,
                                             ),
-                                            maxLines: 1,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          Text(
-                                            "  ${product.price}  جنيه",
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w700,
-                                              color: AppColors.defaultcolor,
+                                            child: Center(
+                                              child: Image.network(
+                                                product.image,
+                                                height: 120.h,
+                                                width: 120.w,
+                                                fit: BoxFit.fill,
+                                                errorBuilder: (context, error, stackTrace) {
+                                                  return const Icon(Icons.broken_image);
+                                                },
+                                              ),
                                             ),
                                           ),
+
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Add Button
+                                              Container(
+                                                height:20.h,
+                                                width: 20.w,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.defaultcolor,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    size: 20,
+                                                    color: AppColors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              // Product Details
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    product.name.split(" ").join("\n"),
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.black,
+                                                    ),
+                                                    maxLines: 1,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  Text(
+                                                    "  ${product.price}  جنيه",
+                                                    textDirection: TextDirection.rtl, // لتجنب المشكلات مع النصوص العربية
+
+                                                    style: const TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight: FontWeight.w700,
+                                                      color: AppColors.defaultcolor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+
                                         ],
                                       ),
-                                    ],
-                                  ),
+
+
+
                                 ),
+
 
                                 // Favorite Button
                                 Align(
                                   alignment: AlignmentDirectional.topCenter,
                                   child:Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 3),
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
 
                                         Container(
-                                          width: MediaQuery.sizeOf(context).width*0.09,
-                                          height: MediaQuery.sizeOf(context).height*0.022,
+                                          width: 30.w,
+                                          height: 25.h,
                                           decoration: BoxDecoration(
                                             color: AppColors.title,
                                             borderRadius: BorderRadius.circular(6)
                                           ),
-                                          child: Text(" -${product.discount}%" ,style: TextStyle(
+                                          child: Text(" -${product.discount}%" ,
+                                            style: TextStyle(
                                             color: AppColors.white,
-                                            fontWeight: FontWeight.w500
+                                            fontWeight: FontWeight.w500,
+                                              fontSize: 10
 
-                                          ),),
+                                          ),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
 
                                         GestureDetector(
@@ -151,6 +168,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                                             });
                                           },
                                           child: CircleAvatar(
+                                            radius: 20.r,
                                             backgroundColor: AppColors.white,
                                             child: Icon(
                                               BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites

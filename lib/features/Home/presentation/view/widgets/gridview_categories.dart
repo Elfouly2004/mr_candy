@@ -26,7 +26,7 @@ class CategoriesGrid extends StatelessWidget {
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 15.0,
-                  childAspectRatio: 1.7
+                  childAspectRatio: 1.5
                 ),
                 itemCount: categories.length,
                 itemBuilder: (context, index) {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mrcandy/features/Category/presentation/view/category_screen.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_product.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -18,7 +20,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
 
-          SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+          SizedBox(height: 40.h),
 
           Center(
             child: Image(
@@ -37,7 +39,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
 
-            SizedBox(height: MediaQuery.of(context).size.height * 0.11),
+            SizedBox(height:60.h),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -55,7 +57,7 @@ class HomePage extends StatelessWidget {
 
 
             Expanded(
-                flex:4,
+                flex:3,
                 child: CategoriesGrid()),
 
 

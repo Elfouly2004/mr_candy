@@ -15,7 +15,11 @@ class ProductsFailureState extends ProductsState {
 class ProductsSuccessState extends ProductsState {
   final List<ProductModel> productList;
 
+  // اضف هنا ميزة Equatable لمقارنة الحقول المهمة فقط
   ProductsSuccessState(this.productList);
+
+  @override
+  List<Object?> get props => [productList];
 }
 
 class AddFavoriteSuccessState extends ProductsState {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../Home/presentation/controller/get_product/get_product_cubit.dart';
 import '../../controller/catgories_deatils_cubit.dart';
 
 class GatgoriesGrid extends StatefulWidget {
@@ -147,8 +148,13 @@ class _GatgoriesGridState extends State<GatgoriesGrid> {
                                         GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              product.inFavorites = !product.inFavorites;
+                                              BlocProvider.of<CatgoriesDeatilsCubit>(context).addFavorite(context, index);
+                                              BlocProvider.of<CatgoriesDeatilsCubit>(context).categoriesdeatials_lst[index].inFavorites =
+                                              !BlocProvider.of<CatgoriesDeatilsCubit>(context).categoriesdeatials_lst[index].inFavorites;
                                             });
+
+
+
                                           },
                                           child: CircleAvatar(
                                             backgroundColor: AppColors.white,

@@ -10,5 +10,8 @@ abstract class CatgoriesRepo {
 
   Future<Either<Failure,  List<ProductModel>>>get_catgories_deatils({required int id});
 
+  Future<Either<Failure, ProductModel>> Addfav();
+
+
 
 }

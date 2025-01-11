@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mrcandy/core/utils/app_colors.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_categories.dart';
 import 'package:mrcandy/features/Home/presentation/view/home_screen.dart';
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: Directionality(
         textDirection: TextDirection.rtl, // لضبط الاتجاه من اليمين إلى اليسار
         child: Container(
-          height: 70,
+          height: 80.h,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -77,20 +78,20 @@ class _HomeState extends State<Home> {
             iconSize: 30,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.house_fill,size: 30,),
+                icon: Icon(CupertinoIcons.house_fill,size: 30.r,),
                 label: "الرئيسيه",
 
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.heart,size: 30),
+                icon: Icon(CupertinoIcons.heart,size: 30.r),
                 label: 'المفضله',
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.bag,size: 30),
+                icon: Icon(CupertinoIcons.bag,size: 30.r),
                 label: 'السله',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings,size: 30),
+                icon: Icon(Icons.settings,size: 30.r),
                 label: 'الاعدادات',
               ),
             ],

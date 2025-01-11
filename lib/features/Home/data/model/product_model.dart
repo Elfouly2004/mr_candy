@@ -1,4 +1,7 @@
-class ProductModel {
+
+import 'package:equatable/equatable.dart';
+
+class ProductModel  extends Equatable{
   int id;
   int price;
   int oldPrice;
@@ -21,7 +24,10 @@ class ProductModel {
     required this.images,
     required this.inFavorites,
     required this.inCart,
-  });
+
+  }
+
+  );
 
   // Factory constructor to create a new Product instance from JSON
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -33,14 +39,12 @@ class ProductModel {
       image: json['image'] ?? '', // Default to empty string if null
       name: json['name'] ?? '',  // Default to empty string if null
       description: json['description'] ?? '', // Default to empty string if null
-      images: json['images'] != null && json['images'] is List
-          ? List<String>.from(json['images'])
+      images: json['images'] != null && json['images'] is List ? List<String>.from(json['images'])
           : [], // Default to an empty list if null or not a list
       inFavorites: json['in_favorites'] ?? false,
       inCart: json['in_cart'] ?? false,
     );
   }
-
 
 
   // Method to convert a Product instance to JSON
@@ -58,4 +62,15 @@ class ProductModel {
       'in_cart': inCart,
     };
   }
+
+
+  @override
+  List<Object?> get props => [id, name, image,images, price,oldPrice, discount, inFavorites,inCart,description];
+
+
+
 }
+
+
+
+

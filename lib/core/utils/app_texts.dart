@@ -16,5 +16,8 @@ class AppTexts {
   static const String choosephoto = "اضف صورة شخصية";
   static const String Categories = " الاقسام ";
   static const String buy = "الاكثر مبيعا";
+  static const String Fav = "Favourites";
+  static const String Setting = "Settings";
+  static const String bag = "السله";
 
 }
