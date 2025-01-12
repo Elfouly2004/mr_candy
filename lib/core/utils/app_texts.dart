@@ -19,5 +19,7 @@ class AppTexts {
   static const String Fav = "Favourites";
   static const String Setting = "Settings";
   static const String bag = "السله";
+  static const String Amount = "الكميه :";
+  static const String Total = " الاجمالي :";
 
 }

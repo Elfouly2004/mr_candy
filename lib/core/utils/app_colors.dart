@@ -24,6 +24,8 @@ class AppColors {
   static const bottom_g1  = Color(0xff1A48BF);
   static const bottom_g2  = Color(0xff731BCD);
   static const gridproduct  = Color(0xffF2F5FC);
+  static const cartdeatils  = Color(0xff615D5D);
+  static const cartresult  = Color(0xff5941AF);
 
 
 
