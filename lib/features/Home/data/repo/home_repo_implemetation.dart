@@ -191,7 +191,6 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
   }
 
   @override
-
   Future<Either<Failure, List<ProductModel>>> getfav() async {
     List<ProductModel> favlist = [];
     final token = Hive.box("setting").get("token");

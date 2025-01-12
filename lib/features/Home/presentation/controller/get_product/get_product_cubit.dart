@@ -12,8 +12,10 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   // قائمة المنتجات التي سيتم تعبئتها بالبيانات بعد جلبها
   List<ProductModel> productList = [];
-  int index1 =0;
-   Map<int,List<ProductModel>> map_forproducts={};
+
+
+  // int index1 =0;
+  //  Map<int,List<ProductModel>> map_forproducts={};
 
 
   static ProductsCubit get(context) => BlocProvider.of(context);
@@ -27,9 +29,9 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFailureState(errorMessage: failure.message));
     }, (right) {
       productList = right;
-      map_forproducts.addAll({
-        index1:productList
-      });
+      // map_forproducts.addAll({
+      //   index1:productList
+      // });
       print("Fetched products: $productList");  // Debug output
       emit(ProductsSuccessState(productList));
     });

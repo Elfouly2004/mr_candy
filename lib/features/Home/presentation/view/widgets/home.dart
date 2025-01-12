@@ -2,17 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mrcandy/core/utils/app_colors.dart';
-import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_categories.dart';
-import 'package:mrcandy/features/Home/presentation/view/home_screen.dart';
-import 'package:mrcandy/features/bag/presentation/views/bag_page.dart';
+import 'package:mrcandy/features/carts/presentation/view/carts_page.dart';
 import 'package:mrcandy/features/favorite/presentation/view/fav_page.dart';
 import 'package:mrcandy/features/settings/presentation/views/setting_page.dart';
-import '../../../../../core/utils/app_images.dart';
-import 'package:mrcandy/core/utils/app_texts.dart';
-import 'package:ionicons/ionicons.dart';
-
 import 'home_page.dart';
-
 
 
 
@@ -30,7 +23,7 @@ class _HomeState extends State<Home> {
   List<Widget> screens  = [
     HomePage(),
     FavoritesPage(),
-    BagPage(),
+    CartsPage(),
     SettingPage()
 
   ] ;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mrcandy/features/carts/presentation/controller/carts_cubit.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../controller/get_product/get_product_cubit.dart';
 import '../../controller/get_product/get_product_state.dart';
@@ -79,18 +80,23 @@ class _ProductsGridState extends State<ProductsGrid> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               // Add Button
-                                              Container(
-                                                height:20.h,
-                                                width: 20.w,
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.defaultcolor,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                ),
-                                                child: const Center(
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    size: 20,
-                                                    color: AppColors.white,
+                                              InkWell(
+                                                onTap:(){
+                                            BlocProvider.of<CartsCubit>(context).addCart(context, index);
+                                                },
+                                                child: Container(
+                                                  height:20.h,
+                                                  width: 20.w,
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.defaultcolor,
+                                                    borderRadius: BorderRadius.circular(5),
+                                                  ),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      size: 20,
+                                                      color: AppColors.white,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

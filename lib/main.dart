@@ -6,6 +6,7 @@ import 'package:mrcandy/features/Greate_account/data/repo/Greate_account_impelem
 import 'package:mrcandy/features/Home/presentation/view/home_screen.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/home_page.dart';
+import 'package:mrcandy/features/carts/presentation/controller/carts_cubit.dart';
 import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
 import 'package:mrcandy/features/login/presentation/view/Login.dart';
 
