@@ -21,5 +21,6 @@ class AppTexts {
   static const String bag = "السله";
   static const String Amount = "الكميه :";
   static const String Total = " الاجمالي :";
+  static const String Addcart = " أضف إلى السلة ";
 
 }

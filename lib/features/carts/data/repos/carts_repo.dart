@@ -8,8 +8,9 @@ import '../model/cart_model.dart';
 abstract class CartsRepo {
 
 
-  Future<Either<Failure, CartItemModel>> Add_carts();
 
   Future<Either<Failure, List<CartItemModel>>> getCarts();
+  
+  Future<Either<Failure, CartItemModel>> DeleteCarts();
 
 }

@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_texts.dart';
+import '../controller/carts_cubit.dart';
 import 'Richtxt.dart';
 
 class Lstview extends StatelessWidget {
@@ -35,26 +37,31 @@ class Lstview extends StatelessWidget {
                 Positioned(
                   top: 0,
                   left: 0,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.w,
-                      vertical: 5.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.r),
-                        bottomRight: Radius.circular(25.r),
-                        bottomLeft: Radius.circular(2.r),
+                  child: InkWell(
+                    onTap: () {
+                      BlocProvider.of<CartsCubit>(context).deleteCart(context, index);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 5.h,
                       ),
-                    ),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.r),
+                          bottomRight: Radius.circular(25.r),
+                          bottomLeft: Radius.circular(2.r),
+                        ),
+                      ),
 
-                    child: Text(
-                      "حذف",
-                      style: GoogleFonts.cairo(
-                        fontSize: 12.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      child: Text(
+                        "حذف",
+                        style: GoogleFonts.cairo(
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

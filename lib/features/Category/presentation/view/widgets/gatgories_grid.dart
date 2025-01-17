@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mrcandy/features/Category/presentation/controller/catgories%20sections%20%20cubit/catgories_sections%20_cubit.dart';
+import 'package:mrcandy/features/Category/presentation/view/category_details_screen.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../Home/presentation/controller/get_product/get_product_cubit.dart';
-import '../../controller/catgories_deatils_cubit.dart';
 
 class GatgoriesGrid extends StatefulWidget {
   final int categoryId;
@@ -18,15 +19,15 @@ class _GatgoriesGridState extends State<GatgoriesGrid> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CatgoriesDeatilsCubit()..fetch_catgories_details(categoryId: widget.categoryId),
-      child: BlocBuilder<CatgoriesDeatilsCubit, CatgoriesDeatilsState>(
+      create: (_) => CatgoriesSectionsCubit()..fetch_catgories_details(categoryId: widget.categoryId),
+      child: BlocBuilder<CatgoriesSectionsCubit, CatgoriesSectionsState>(
         builder: (context, state) {
           if (state is CategoriesLoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is CategoriesFailureState) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else if (state is CategoriesSuccessState) {
-            final products = context.read<CatgoriesDeatilsCubit>().categoriesdeatials_lst;
+            final products = context.read<CatgoriesSectionsCubit>().categoriesdeatials_lst;
 
             return SafeArea(
               child: SingleChildScrollView(
@@ -45,28 +46,34 @@ class _GatgoriesGridState extends State<GatgoriesGrid> {
                         final product = products[index];
                         return LayoutBuilder(
                           builder: (context, constraints) {
-                            final screenHeight = constraints.maxHeight;
-                            final screenWidth = constraints.maxWidth;
 
                             return Stack(
                               children: [
                                 // Background Container
-                                Container(
-                                  height: 156.h, // نسبة مئوية من الشاشة
-                                  width: 180.w, // نسبة مئوية من الشاشة
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: AppColors.gridproduct,
-                                  ),
-                                  child: Center(
-                                    child: Image.network(
-                                      product.image,
-                                      height: 100.h,
-                                      width: 100.w,
-                                      fit: BoxFit.fill,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return const Icon(Icons.broken_image);
-                                      },
+                                InkWell(
+                                  onTap:(){
+                     print("ADSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA      ${product.id}");
+                Navigator.push(context, MaterialPageRoute(
+                 builder: (context) => CategoryDetailsScreen(product: product,),));
+                            },
+
+                                  child: Container(
+                                    height: 156.h, // نسبة مئوية من الشاشة
+                                    width: 180.w, // نسبة مئوية من الشاشة
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: AppColors.gridproduct,
+                                    ),
+                                    child: Center(
+                                      child: Image.network(
+                                        product.image,
+                                        height: 100.h,
+                                        width: 100.w,
+                                        fit: BoxFit.fill,
+                                        errorBuilder: (context, error, stackTrace) {
+                                          return const Icon(Icons.broken_image);
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -80,18 +87,24 @@ class _GatgoriesGridState extends State<GatgoriesGrid> {
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       // Add Button
-                                      Container(
-                                        height: screenHeight * 0.15,
-                                        width: screenWidth * 0.15,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.defaultcolor,
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.add,
-                                            size: 20,
-                                            color: AppColors.white,
+                                      InkWell(
+                                        onTap:(){
+                                          BlocProvider.of<CatgoriesSectionsCubit>(context).addCart(context, index);
+
+                                        },
+                                        child: Container(
+                                          height: 25.h,
+                                          width: 25.w,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.defaultcolor,
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.add,
+                                              size: 20,
+                                              color: AppColors.white,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -148,9 +161,9 @@ class _GatgoriesGridState extends State<GatgoriesGrid> {
                                         GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              BlocProvider.of<CatgoriesDeatilsCubit>(context).addFavorite(context, index);
-                                              BlocProvider.of<CatgoriesDeatilsCubit>(context).categoriesdeatials_lst[index].inFavorites =
-                                              !BlocProvider.of<CatgoriesDeatilsCubit>(context).categoriesdeatials_lst[index].inFavorites;
+                                              BlocProvider.of<CatgoriesSectionsCubit>(context).addFavorite(context, index);
+                                              BlocProvider.of<CatgoriesSectionsCubit>(context).categoriesdeatials_lst[index].inFavorites =
+                                              !BlocProvider.of<CatgoriesSectionsCubit>(context).categoriesdeatials_lst[index].inFavorites;
                                             });
 
 

@@ -29,25 +29,27 @@ class CartsCubit extends Cubit<CartsState> {
   }
 
 
-  Future<void> addCart(context, int index) async {
-    final result = await cartRepo.Add_carts(context: context, index: index);
+
+  Future<void> deleteCart(context, int index) async {
+    emit(CartsLoadingState());
+
+    final result = await cartRepo.DeleteCarts(context: context, index: index);
 
     result.fold(
           (failure) {
-        emit(CartsFailureState( failure.message));
+        emit(CartsFailureState(failure.message));
       },
-          (updatedProduct) {
+          (_) {
+        // حذف العنصر من القائمة
+        cartsList.removeAt(index);
 
-        cartsList[index] = updatedProduct;
-
-        // إصدار حالة النجاح مع قائمة جديدة لضمان إعادة البناء
         emit(CartsSuccessState(List.from(cartsList)));
+
+
+        print("deleeeeeeeeted");
       },
     );
   }
-
-
-
 
 
 }

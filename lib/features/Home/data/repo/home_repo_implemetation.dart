@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:mrcandy/features/Home/data/model/categories_model.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/utils/endpoints.dart';
+import '../../../carts/data/model/cart_model.dart';
 import '../../presentation/controller/get_product/get_product_cubit.dart';
 import '../model/banners_model.dart';
 import '../model/product_model.dart';
@@ -229,6 +230,60 @@ print("iddddddddddddd = ${BlocProvider.of<ProductsCubit>(context).productList[in
       return left(NoInternetFailure(message: "No Internet"));
     } catch (e) {
       print('Error occurred: $e'); // Print the error for debugging
+      return left(ApiFailure(message: "Error Occurred"));
+    }
+  }
+
+
+
+  @override
+  Future<Either<Failure, CartItemModel>> Add_carts({context, index}) async {
+    print("Token is: ${Hive.box("setting").get("token")}");
+    final token = Hive.box("setting").get("token");
+
+    if (token == null || token.isEmpty) {
+      print("Error: Token is missing or invalid");
+      return left(ApiFailure(message: "Authentication token is missing."));
+    }
+
+    try {
+      final Map<String, dynamic> body = {
+        "product_id": BlocProvider.of<ProductsCubit>(context)
+            .productList[index]
+            .id
+            .toString()
+      };
+
+      final response = await http.post(
+        Uri.parse(EndPoints.baseUrl + EndPoints.carts),
+        headers: {
+          "Authorization": "$token",
+        },
+        body: body,
+      );
+
+      print("Response: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+
+        if (responseBody["status"] == true) {
+          // طلب ناجح
+          final cartItemData = responseBody["data"];
+          final cartItemModel = CartItemModel.fromJson(cartItemData);
+          return right(cartItemModel);
+        } else {
+          // فشل بسبب خطأ في الطلب
+          return left(ApiFailure(message: responseBody["message"] ?? "Failed to add to cart"));
+        }
+      } else {
+        return left(ApiFailure(
+            message: "Failed to fetch data, Status code: ${response.statusCode}"));
+      }
+    } on SocketException {
+      return left(NoInternetFailure(message: "No Internet"));
+    } catch (e) {
+      print('Error occurred: $e');
       return left(ApiFailure(message: "Error Occurred"));
     }
   }

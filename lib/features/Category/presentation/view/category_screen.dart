@@ -44,18 +44,17 @@ final int id;
             ),
           ),
         centerTitle: true,
-        actions: [
+        leading:
           IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: Icon(
-              Icons.arrow_forward_ios_outlined,
+              Icons.arrow_back_ios_new,
               color: AppColors.white,
             ),
           ),
 
-        ]
       ),
 
       body: Container(

@@ -82,11 +82,11 @@ class _ProductsGridState extends State<ProductsGrid> {
                                               // Add Button
                                               InkWell(
                                                 onTap:(){
-                                            BlocProvider.of<CartsCubit>(context).addCart(context, index);
+                                                  BlocProvider.of<ProductsCubit>(context).addCart(context, index);
                                                 },
                                                 child: Container(
-                                                  height:20.h,
-                                                  width: 20.w,
+                                                  height:25.h,
+                                                  width: 25.w,
                                                   decoration: BoxDecoration(
                                                     color: AppColors.defaultcolor,
                                                     borderRadius: BorderRadius.circular(5),

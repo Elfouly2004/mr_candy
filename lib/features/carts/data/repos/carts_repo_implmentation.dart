@@ -9,6 +9,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:mrcandy/core/errors/failure.dart';
 
 import 'package:mrcandy/features/Home/data/model/product_model.dart';
+import 'package:mrcandy/features/carts/presentation/controller/carts_cubit.dart';
 
 import '../../../../core/utils/endpoints.dart';
 import '../../../Home/presentation/controller/get_product/get_product_cubit.dart';
@@ -18,57 +19,7 @@ import 'package:http/http.dart' as http;
 
 
 class CartsRepoImplmentation implements CartsRepo {
-  @override
-  Future<Either<Failure, CartItemModel>> Add_carts({context, index}) async {
-    print("Token is: ${Hive.box("setting").get("token")}");
-    final token = Hive.box("setting").get("token");
 
-    if (token == null || token.isEmpty) {
-      print("Error: Token is missing or invalid");
-      return left(ApiFailure(message: "Authentication token is missing."));
-    }
-
-    try {
-      final Map<String, dynamic> body = {
-        "product_id": BlocProvider.of<ProductsCubit>(context)
-            .productList[index]
-            .id
-            .toString()
-      };
-
-      final response = await http.post(
-        Uri.parse(EndPoints.baseUrl + EndPoints.carts),
-        headers: {
-          "Authorization": "$token",
-        },
-        body: body,
-      );
-
-      print("Response: ${response.body}");
-
-      if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
-
-        if (responseBody["status"] == true) {
-          // طلب ناجح
-          final cartItemData = responseBody["data"];
-          final cartItemModel = CartItemModel.fromJson(cartItemData);
-          return right(cartItemModel);
-        } else {
-          // فشل بسبب خطأ في الطلب
-          return left(ApiFailure(message: responseBody["message"] ?? "Failed to add to cart"));
-        }
-      } else {
-        return left(ApiFailure(
-            message: "Failed to fetch data, Status code: ${response.statusCode}"));
-      }
-    } on SocketException {
-      return left(NoInternetFailure(message: "No Internet"));
-    } catch (e) {
-      print('Error occurred: $e');
-      return left(ApiFailure(message: "Error Occurred"));
-    }
-  }
 
 
   @override
@@ -104,6 +55,49 @@ class CartsRepoImplmentation implements CartsRepo {
         return left(ApiFailure(message: "Failed to fetch data, Status code: ${response.statusCode}"));
       }
 
+    } on SocketException {
+      return left(NoInternetFailure(message: "No Internet"));
+    } catch (e) {
+      print('Error occurred: $e');
+      return left(ApiFailure(message: "Error Occurred"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CartItemModel>> DeleteCarts({context, index}) async {
+    print("Token is: ${Hive.box("setting").get("token")}");
+    final token = Hive.box("setting").get("token");
+
+    if (token == null || token.isEmpty) {
+      return left(ApiFailure(message: "Authentication token is missing."));
+    }
+
+    try {
+      final response = await http.delete(
+        Uri.parse("${EndPoints.baseUrl + EndPoints.carts}/${BlocProvider.of<CartsCubit>(context).cartsList[index].id.toString()}"),
+        headers: {
+          "Authorization": "$token",
+        },
+      );
+
+      print("Response: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+
+        if (responseBody["status"] == true) {
+          // طلب ناجح
+          final cartItemData = responseBody["data"];
+          final cartItemModel = CartItemModel.fromJson(cartItemData);
+          return right(cartItemModel);
+        } else {
+          // فشل بسبب خطأ في الطلب
+          return left(ApiFailure(message: responseBody["message"] ?? "Failed to delete from cart"));
+        }
+      } else {
+        return left(ApiFailure(
+            message: "Failed to fetch data, Status code: ${response.statusCode}"));
+      }
     } on SocketException {
       return left(NoInternetFailure(message: "No Internet"));
     } catch (e) {

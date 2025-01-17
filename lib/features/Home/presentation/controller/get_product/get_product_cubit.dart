@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mrcandy/features/Home/data/model/categories_model.dart';
+import 'package:mrcandy/features/carts/data/model/cart_model.dart';
 import '../../../data/model/product_model.dart';
 import '../../../data/repo/home_repo_implemetation.dart';
 import 'get_product_state.dart';
@@ -12,6 +13,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   // قائمة المنتجات التي سيتم تعبئتها بالبيانات بعد جلبها
   List<ProductModel> productList = [];
+  List<CartItemModel> cartsList = [];
 
 
   // int index1 =0;
@@ -57,6 +59,26 @@ class ProductsCubit extends Cubit<ProductsState> {
       },
     );
   }
+
+
+
+  Future<void> addCart(context, int index) async {
+    final result = await homeRepo.Add_carts(context: context, index: index);
+
+    result.fold(
+          (failure) {
+            emit(ProductsFailureState(errorMessage: failure.message));
+      },
+          (updatedProduct) {
+
+        cartsList[index] = updatedProduct;
+
+        // إصدار حالة النجاح مع قائمة جديدة لضمان إعادة البناء
+        emit(ProductsSuccessState(List.from(cartsList)));
+      },
+    );
+  }
+
 
 
 }
