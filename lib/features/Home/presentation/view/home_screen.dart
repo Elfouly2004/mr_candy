@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(MediaQuery.sizeOf(context).height * 0.05),
+      preferredSize: Size.fromHeight(MediaQuery.sizeOf(context).height * 0.04),
       child: Stack(
         children: [
            Column(
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               
               // النصف الثاني بالأبيض
               Expanded(
-                flex: 4,
+                flex: 6,
                 child: Container(
                   color: Colors.white,
                   child: child2,
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
           ),
           //  فوق النصين
           Positioned(
-            top: 180.h,
+            top: 150.h,
             left: 0.0,
             right: 0.0,
             child: Center(

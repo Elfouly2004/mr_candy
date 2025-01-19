@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mrcandy/core/utils/app_images.dart';
 import 'package:mrcandy/core/utils/app_texts.dart';
@@ -54,17 +55,17 @@ class _SliderpageState extends State<Sliderpage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.09,
+                              height: 90.h,
                             ),
                             Center(
                               child: Image(
                                 image: AssetImage(sliders[index].image),
-                                width: MediaQuery.of(context).size.width * 0.7,
-                                height: MediaQuery.of(context).size.height * 0.3,
+                                width: 200.w,
+                                height: 300.h,
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.2,
+                              height:200.h,
                             ),
                             Text(
                               sliders[index].title,
@@ -78,7 +79,7 @@ class _SliderpageState extends State<Sliderpage> {
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
+                              height:20.h,
                             ),
                             Text(
                               AppTexts.Slider_des,
@@ -92,7 +93,7 @@ class _SliderpageState extends State<Sliderpage> {
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
+                              height: 50.h,
                             ),
 
                           ],
@@ -112,7 +113,7 @@ class _SliderpageState extends State<Sliderpage> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
+                    height:50.h,
                   ),
                   InkWell(
                     onTap: () {
@@ -129,8 +130,8 @@ class _SliderpageState extends State<Sliderpage> {
                       }
                     },
                     child: Container(
-                      width: 164,
-                      height: 50,
+                      width: 164.w,
+                      height: 50.h,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
@@ -148,7 +149,7 @@ class _SliderpageState extends State<Sliderpage> {
                         child: Text(
                           sliders[currentIndex].buttonText, // استخدام currentIndex لعرض النص المناسب
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                           ),

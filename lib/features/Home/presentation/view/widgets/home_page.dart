@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
 
-          SizedBox(height: 40.h),
+          SizedBox(height: 20.h),
 
           Center(
             child: Image(
@@ -39,44 +39,41 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
 
-            SizedBox(height:60.h),
+            SizedBox(height:150.h),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text(
-                  AppTexts.Categories,
-                  style: TextStyle(
-                    color: AppColors.Categories,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
+
+
+            Align(
+              alignment: Alignment.centerRight,
+              child: const  Text(
+                AppTexts.Categories,
+                style: TextStyle(
+                  color: AppColors.Categories,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
                 ),
-              ],
+              ),
             ),
 
-
             Expanded(
-                flex:3,
+                flex:4,
                 child: CategoriesGrid()),
 
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text(
-                  AppTexts.buy,
-                  style: TextStyle(
-                    color: AppColors.Categories,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
 
+            Align(
+              alignment: Alignment.centerRight,
+              child: const Text(
+                AppTexts.buy,
+                style: TextStyle(
+                  color: AppColors.Categories,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
             Expanded(
-                flex:2,
+                flex:4,
                 child: ProductsGrid()),
 
           ],),
