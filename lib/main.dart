@@ -60,6 +60,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-git remote add origin https://github.com/Elfouly2004/mr_candy
 
-git remote set-url origin https://github.com/Elfouly2004/mr_candy
