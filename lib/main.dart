@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,53 +12,48 @@ import 'features/login/presentation/controller/login_cubit.dart';
 import 'features/splash_screen/views/splash_screen.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox("setting");
   await ScreenUtil.ensureScreenSize();
 
   runApp(
-
-      MultiBlocProvider(
-          providers: [
-
-            BlocProvider(create: (_) => ProductsCubit()..fetchproducts()),
-
-            BlocProvider<LoginCubit>(
-              create: (context) => LoginCubit(LoginRepoImplementation()),
-            ),
-            BlocProvider<GreateAccountCubit>(
-              create: (context) => GreateAccountCubit(GreateAccountImplementation()),
-            ),
-
-          ],
-          child:  const MyApp()
-      ));
-
-
+    DevicePreview(
+      enabled: true, // قم بتعيين `false` عند إصدار التطبيق
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => ProductsCubit()..fetchproducts()),
+          BlocProvider<LoginCubit>(
+            create: (context) => LoginCubit(LoginRepoImplementation()),
+          ),
+          BlocProvider<GreateAccountCubit>(
+            create: (context) => GreateAccountCubit(GreateAccountImplementation()),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  ScreenUtilInit(
-
+    return ScreenUtilInit(
       designSize: const Size(375, 1006),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Mr Candy',
-          home: splashscreen(),
+          home: const splashscreen(),
+          // Enable Device Preview integration
+          builder: DevicePreview.appBuilder, // يجعل التطبيق يعمل ضمن Device Preview
         );
       },
     );
   }
 }
-
-

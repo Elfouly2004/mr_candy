@@ -14,6 +14,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           // Custom Appbar as a widget
@@ -57,7 +58,7 @@ class FavoritesPage extends StatelessWidget {
                                 children: [
                                   // Background Container
                                   Container(
-                                    height: 150.h,
+                                    height: 160.h,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(color: AppColors.Appbar2),
@@ -138,24 +139,24 @@ class FavoritesPage extends StatelessWidget {
                                                 Text(
                                                   "${product.price} جنيه",
                                                   textDirection: TextDirection.rtl, // لتجنب المشكلات مع النصوص العربية
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
+                                                  style: TextStyle(
+                                                    fontSize: 16.sp,
                                                     fontWeight: FontWeight.w700,
                                                     color: AppColors.defaultcolor,
                                                   ),
                                                 ),
 
-                                                const SizedBox(height: 5),
+                                                const SizedBox(height: 0),
                                                 // Product Discount
-                                                if (product.discount > 0)
-                                                  Text(
-                                                    " % خصم: ${product.discount}",
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight: FontWeight.w800,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
+                                                // if (product.discount > 0)
+                                                //   Text(
+                                                //     " % خصم: ${product.discount}",
+                                                //     style:  TextStyle(
+                                                //       fontSize: 12.sp,
+                                                //       fontWeight: FontWeight.w800,
+                                                //       color: Colors.red,
+                                                //     ),
+                                                //   ),
                                               ],
                                             ),
                                           ),

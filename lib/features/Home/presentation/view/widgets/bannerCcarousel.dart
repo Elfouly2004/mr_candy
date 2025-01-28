@@ -18,8 +18,61 @@ class BannerCarousel extends StatefulWidget {
 class _BannerCarouselState extends State<BannerCarousel> {
   int _currentIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
+
+    double deviceHeight = MediaQuery.of(context).size.height;
+    int height ,height2,width ;
+    double dotHeight,dotWidth  ;
+
+    if (deviceHeight > 1500) {
+      height = 400;
+      width = 750;
+      height2 =400;
+      dotHeight= 10;
+       dotWidth=10;
+
+    } else if (deviceHeight > 1000) {
+
+      height = 250;
+      width = 550;
+      height2 =300;
+      dotHeight= 10;
+      dotWidth=10;
+
+    } else if (deviceHeight > 850) {
+
+      height = 180;
+      width = 300;
+      height2 = 80;
+      dotHeight= 8;
+      dotWidth=8;
+    } else if (deviceHeight > 750) {
+
+      height = 180;
+      width = 300;
+      height2 = 90;
+      dotHeight= 8;
+      dotWidth=8;
+    } else if (deviceHeight > 700) {
+
+      height = 140;
+      width = 300;
+      height2 = 90;
+      dotHeight= 8;
+      dotWidth=8;
+    } else {
+
+      height = 130;
+      height2 = 40;
+      width = 270;
+      dotHeight= 5;
+      dotWidth=5;
+    }
+
+
+
     return BlocProvider(
       create: (context) => BannersCubit()..fetchBanners(),
       child: BlocBuilder<BannersCubit, BannersStates>(
@@ -37,7 +90,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                  children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: 180.h,
+                    height: height.h,
                     autoPlay: true,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -49,8 +102,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                          width: 300.w,
-                          height:100.h,
+                          width: width.w,
+                          height:height2.h,
                           margin: const  EdgeInsets.symmetric(horizontal: 15.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -65,14 +118,15 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     );
                   }).toList(),
                 ),
+
                 SizedBox(height: 15.h),
 
                 AnimatedSmoothIndicator(
                   activeIndex: _currentIndex,
                   count: banners.length,
-                  effect: const ExpandingDotsEffect(
-                    dotHeight: 8.0,
-                    dotWidth: 8.0,
+                  effect:  ExpandingDotsEffect(
+                    dotHeight: dotHeight,
+                    dotWidth: dotWidth,
                     activeDotColor: AppColors.Appbar2,
                     dotColor: Colors.grey,
                   ),

@@ -12,6 +12,47 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double deviceHeight = MediaQuery.of(context).size.height;
+    int height  ;
+    if (deviceHeight > 1400) {
+
+
+      height =280;
+
+
+    } else if (deviceHeight > 1340) {
+
+      height =210;
+
+    } else  if (deviceHeight > 1000) {
+
+       height =210;
+
+
+    }else if (deviceHeight > 850) {
+
+      height = 130;
+
+    }
+    else if (deviceHeight > 750) {
+
+      height = 180;
+
+    }
+    else if (deviceHeight > 700) {
+      height =70;
+
+
+    }
+    else {
+
+      height = 80;
+
+    }
+
+
+
     return PreferredSize(
       preferredSize: Size.fromHeight(MediaQuery.sizeOf(context).height * 0.04),
       child: Stack(
@@ -20,7 +61,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               // النصف الأول مع gradient
               Expanded(
-                flex: 2,
+                flex:2,
                 child: Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -49,7 +90,7 @@ class HomeScreen extends StatelessWidget {
           ),
           //  فوق النصين
           Positioned(
-            top: 150.h,
+            top: height.h,
             left: 0.0,
             right: 0.0,
             child: const Center(

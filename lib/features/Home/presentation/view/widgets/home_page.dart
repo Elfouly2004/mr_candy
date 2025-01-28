@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mrcandy/features/Home/presentation/view/widgets/gridview_product.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -8,63 +9,115 @@ import '../../../../../core/utils/app_texts.dart';
 import '../home_screen.dart';
 import 'gridview_categories.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return HomeScreen(
 
+    // تحديد مرونة Expanded بناءً على ارتفاع الجهاز
+    double deviceHeight = MediaQuery.of(context).size.height;
+    int expandedFlex,  expandedFlex2 ,height, height2 ;
+
+    if (deviceHeight > 1400) {
+
+      expandedFlex = 6;
+      expandedFlex2 = 4;
+      height = 270;
+      height2 = 20;
+
+    } else if (deviceHeight > 1340) {
+
+      expandedFlex = 6;
+      expandedFlex2 = 4;
+      height = 150;
+      height2 = 20;
+
+    } else  if (deviceHeight > 1000) {
+
+      expandedFlex = 6;
+      expandedFlex2 = 4;
+      height = 230;
+      height2 = 20;
+
+    } else if (deviceHeight > 850) {
+      // الأجهزة الكبيرة
+      expandedFlex = 5;
+      expandedFlex2 = 6;
+      height = 120;
+      height2 = 20;
+    }
+    else if (deviceHeight > 750) {
+      // الأجهزة المتوسطة
+      expandedFlex = 3;
+      expandedFlex2 = 4;
+      height = 150;
+      height2 = 25;
+    }
+    else if (deviceHeight > 700) {
+      // الأجهزة الصغيرة
+      expandedFlex = 1;
+      expandedFlex2 = 1;
+      height = 50;
+      height2 = 0;
+    }
+    else {
+      // الأجهزة الصغيرة جدًا
+      expandedFlex = 1;
+      expandedFlex2 = 1;
+      height = 50;
+      height2 = 0;
+    }
+
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  ${deviceHeight}");
+
+    return HomeScreen(
       child2: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
+            SizedBox(height: height.h),
 
-            SizedBox(height:150.h),
-
-
-
-            const Align(
+           Align(
               alignment: Alignment.centerRight,
               child: Text(
                 AppTexts.Categories,
-                style: TextStyle(
+                style: GoogleFonts.almarai(
                   color: AppColors.Categories,
-                  fontSize: 20,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
 
-            const Expanded(
-                flex:4,
-                child: CategoriesGrid()),
+            Expanded(
+              flex: expandedFlex,
+              child: const CategoriesGrid(),
+            ),
 
-
-
-            const Align(
+            Align(
               alignment: Alignment.centerRight,
               child: Text(
                 AppTexts.buy,
-                style: TextStyle(
+                style: GoogleFonts.almarai(
                   color: AppColors.Categories,
-                  fontSize: 20,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            const Expanded(
-                flex:4,
-                child: ProductsGrid()),
 
-          ],),
+            Expanded(
+              flex: expandedFlex2,
+              child: ProductsGrid(),
+            ),
+          ],
+        ),
       ),
 
       child: Column(
         children: [
-
-          SizedBox(height: 20.h),
+          SizedBox(height: height2.h),
 
           Center(
             child: Image(
@@ -73,10 +126,9 @@ class HomePage extends StatelessWidget {
               width: MediaQuery.sizeOf(context).height * 0.13,
             ),
           ),
-
-
         ],
       ),
     );
   }
 }
+

@@ -25,7 +25,7 @@ class Lstview extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Container(
-            height: 160.h,
+            height: 175.h,
             width: 330.w,
             decoration: BoxDecoration(
               color: AppColors.gridproduct,

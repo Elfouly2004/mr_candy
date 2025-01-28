@@ -15,6 +15,109 @@ class ProductsGrid extends StatefulWidget {
 class _ProductsGridState extends State<ProductsGrid> {
   @override
   Widget build(BuildContext context) {
+
+
+    // تحديد  Expanded بناءً على ارتفاع الجهاز
+    double deviceHeight = MediaQuery.of(context).size.height;
+    int contanierheight, contanierwidth ,imgheight ,
+        imgwidth , container2 ,space, radius ,iconsize;
+
+
+
+    if (deviceHeight > 1400) {
+
+      contanierheight=350;
+      contanierwidth=350;
+      imgheight=300;
+      imgwidth=270;
+      container2=40;
+      space=250;
+      iconsize=30;
+      radius=30;
+
+
+    } else if (deviceHeight > 1340) {
+      contanierheight=270;
+      contanierwidth=270;
+      imgheight=240;
+      imgwidth=200;
+      container2=40;
+      space=200;
+      iconsize=30;
+      radius=30;
+
+
+    } else  if (deviceHeight > 1000) {
+
+
+      contanierheight=200;
+      contanierwidth=200;
+      imgheight=300;
+      imgwidth=270;
+      container2=40;
+      space=120;
+      iconsize=20;
+      radius=20;
+
+    }
+    else if (deviceHeight > 850) {
+      // الأجهزة الكبيرة
+      contanierheight=200;
+      contanierwidth=153;
+      imgheight=160;
+      imgwidth=200;
+      container2=25;
+      space=95;
+      iconsize=15;
+      radius=15;
+
+    }
+    else if (deviceHeight > 750) {
+      // الأجهزة المتوسطة
+      contanierheight=160;
+      contanierwidth=140;
+      imgheight=160;
+      imgwidth=200;
+      container2=25;
+      space=85;
+      iconsize=15;
+      radius=20;
+
+
+
+    }
+    else if (deviceHeight > 700) {
+      // الأجهزة الصغيرة
+      contanierheight=150;
+      contanierwidth=130;
+      imgheight=160;
+      imgwidth=200;
+      container2=25;
+      space=85;
+      iconsize=15;
+      radius=20;
+
+
+
+    }
+    else {
+      // الأجهزة الصغيرة جدًا
+      contanierheight=130;
+      contanierwidth=130;
+      imgheight=120;
+      imgwidth=120;
+      container2=25;
+      space=70;
+      iconsize=15;
+      radius=15;
+
+
+
+    }
+
+
+
+
     return BlocProvider(
       create: (_) => ProductsCubit()..fetchproducts(),
       child: BlocBuilder<ProductsCubit, ProductsState>(
@@ -40,7 +143,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                     return Stack(
                       children: [
                         Container(
-                          width: 153.w,
+                          width: contanierwidth.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: AppColors.white,
@@ -48,16 +151,16 @@ class _ProductsGridState extends State<ProductsGrid> {
                           child: Column(
                             children: [
                               Container(
-                                height: 155.h,
-                                width: 153.w,
+                                height: contanierheight.h,
+                                width: 400.w,
                                 decoration: const BoxDecoration(
                                   color: AppColors.gridproduct,
                                 ),
                                 child: Center(
                                   child: Image.network(
                                     product.image,
-                                    height: 120.h,
-                                    width: 120.w,
+                                    height: imgheight.h,
+                                    width: imgwidth.w,
                                     fit: BoxFit.fill,
                                     errorBuilder: (context, error, stackTrace) {
                                       return const Icon(Icons.broken_image);
@@ -126,11 +229,14 @@ class _ProductsGridState extends State<ProductsGrid> {
                           left: 5.w,
 
                           child:Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
 
                               Container(
                                 padding: EdgeInsets.all(5.w),
+                                height:container2.h ,
+                                width: container2.w,
                                 decoration: BoxDecoration(
                                   color: AppColors.title,
                                   borderRadius: BorderRadius.circular(6),
@@ -142,10 +248,11 @@ class _ProductsGridState extends State<ProductsGrid> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 10,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
 
-                              SizedBox(width: 85.w,),
+                              SizedBox(width: space.w,),
 
                               GestureDetector(
                                 onTap: () {
@@ -156,13 +263,14 @@ class _ProductsGridState extends State<ProductsGrid> {
                                   });
                                 },
                                 child: CircleAvatar(
-                                  radius: 20.r,
+                                  radius: radius.r,
                                   backgroundColor: AppColors.white,
                                   child: Icon(
                                     BlocProvider.of<ProductsCubit>(context).productList[index].inFavorites
                                         ? Icons.favorite
                                         : Icons.favorite_border,
                                     color: AppColors.defaultcolor,
+                                    size: iconsize.sp,
                                   ),
                                 ),
                               ),

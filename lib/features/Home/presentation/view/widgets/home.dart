@@ -7,8 +7,6 @@ import 'package:mrcandy/features/favorite/presentation/view/fav_page.dart';
 import 'package:mrcandy/features/settings/presentation/views/setting_page.dart';
 import 'home_page.dart';
 
-
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -17,27 +15,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int currentIndex = 0;
 
-  int CurrentIndex =  0;
-
-  List<Widget> screens  = [
+  final List<Widget> screens = [
     const HomePage(),
     const FavoritesPage(),
     const CartsPage(),
-    const SettingPage()
+    const SettingPage(),
+  ];
 
-  ] ;
   @override
   Widget build(BuildContext context) {
+    // تحديد الطول الديناميكي بناءً على حجم الشاشة
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double bottomNavHeight;
+
+    if (deviceHeight == 890.2857142857143) {
+      // الأجهزة الكبيرة
+      bottomNavHeight = 70.h;
+    } else if (deviceHeight > 860) {
+      // الأجهزة الكبيرة
+      bottomNavHeight = 100.h;
+    }
+    else if (deviceHeight > 700) {
+      // الأجهزة الكبيرة
+      bottomNavHeight = 110.h;
+    } else if (deviceHeight > 600) {
+      // الأجهزة المتوسطة
+      bottomNavHeight = 70.h;
+    } else {
+      // الأجهزة الصغيرة
+      bottomNavHeight = 60.h;
+    }
+
     return Scaffold(
-
-      body: screens[CurrentIndex],
-
-
+      body: screens[currentIndex],
       bottomNavigationBar: Directionality(
         textDirection: TextDirection.rtl, // لضبط الاتجاه من اليمين إلى اليسار
         child: Container(
-          height: 80.h,
+          height: bottomNavHeight,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               colors: [
@@ -49,7 +65,7 @@ class _HomeState extends State<Home> {
             ),
             border: Border.all(
               color: Colors.white, // لون الإطار
-              width: 0,         // سماكة الإطار
+              width: 0, // سماكة الإطار
             ),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -57,43 +73,38 @@ class _HomeState extends State<Home> {
             ),
           ),
           child: BottomNavigationBar(
-
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent, // لتجنب تأثير اللون الافتراضي
-            currentIndex: CurrentIndex,
+            currentIndex: currentIndex,
             onTap: (bottomIndex) {
               setState(() {
-                CurrentIndex = bottomIndex;
+                currentIndex = bottomIndex;
               });
             },
             selectedItemColor: Colors.white, // لون العنصر النشط
-            unselectedItemColor: Colors.white.withOpacity(1), // لون العنصر غير النشط
-            iconSize: 30,
+            unselectedItemColor: Colors.white.withOpacity(0.7), // لون العنصر غير النشط
+            iconSize: 25.sp,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.house_fill,size: 30.r,),
+                icon: Icon(CupertinoIcons.house_fill, size: 25.sp),
                 label: "الرئيسيه",
-
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.heart,size: 30.r),
+                icon: Icon(CupertinoIcons.heart, size: 25.sp),
                 label: 'المفضله',
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.bag,size: 30.r),
+                icon: Icon(CupertinoIcons.bag, size: 25.sp),
                 label: 'السله',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings,size: 30.r),
+                icon: Icon(Icons.settings, size: 25.sp),
                 label: 'الاعدادات',
               ),
             ],
           ),
         ),
       ),
-
-
-
     );
   }
 }

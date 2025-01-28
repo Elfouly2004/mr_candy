@@ -24,5 +24,6 @@ class AppTexts {
   static const String Addcart = " أضف إلى السلة ";
   static const String price = "السعر";
   static const String discoundt = "الخصم";
+  static const String profile = "profile";
 
 }
