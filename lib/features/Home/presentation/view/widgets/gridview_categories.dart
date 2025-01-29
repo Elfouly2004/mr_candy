@@ -23,12 +23,11 @@ class CategoriesGrid extends StatelessWidget {
 
             return GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(10), // إزالة أي حشوات افتراضية حول الشبكة
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 10.0, // إزالة المسافات الأفقية بين العناصر
                 mainAxisSpacing: 10.0, // إزالة المسافات الرأسية بين العناصر
-                childAspectRatio: 1.5,
+                childAspectRatio: 1.6,
               ),
               itemCount: categories.length,
               itemBuilder: (context, index) {
@@ -59,11 +58,10 @@ class CategoriesGrid extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Image.network(
                               category.urlImage,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.fitWidth,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 4),
                         Text(
                           category.name,
                           style: const TextStyle(

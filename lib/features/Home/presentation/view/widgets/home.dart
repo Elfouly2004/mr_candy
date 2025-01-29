@@ -6,6 +6,8 @@ import 'package:mrcandy/features/carts/presentation/view/carts_page.dart';
 import 'package:mrcandy/features/favorite/presentation/view/fav_page.dart';
 import 'package:mrcandy/features/settings/presentation/views/setting_page.dart';
 import 'home_page.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,85 +28,57 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // تحديد الطول الديناميكي بناءً على حجم الشاشة
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double bottomNavHeight;
 
-    if (deviceHeight == 890.2857142857143) {
-      // الأجهزة الكبيرة
-      bottomNavHeight = 70.h;
-    } else if (deviceHeight > 860) {
-      // الأجهزة الكبيرة
-      bottomNavHeight = 100.h;
-    }
-    else if (deviceHeight > 700) {
-      // الأجهزة الكبيرة
-      bottomNavHeight = 110.h;
-    } else if (deviceHeight > 600) {
-      // الأجهزة المتوسطة
-      bottomNavHeight = 70.h;
-    } else {
-      // الأجهزة الصغيرة
-      bottomNavHeight = 60.h;
-    }
+
+
 
     return Scaffold(
       body: screens[currentIndex],
-      bottomNavigationBar: Directionality(
-        textDirection: TextDirection.rtl, // لضبط الاتجاه من اليمين إلى اليسار
-        child: Container(
-          height: bottomNavHeight,
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                AppColors.bottom_g1, // اللون الأول للتدرج
-                AppColors.bottom_g2, // اللون الثاني للتدرج
-              ],
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+
+
+    bottomNavigationBar: Directionality(
+    textDirection: TextDirection.rtl,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),  // حواف دائرية من الأعلى (يسار)
+          topRight: Radius.circular(20), // حواف دائرية من الأعلى (يمين)
+        ),
+        child: SalomonBottomBar(
+          backgroundColor: AppColors.bottomNavbar,
+          unselectedItemColor: AppColors.white,
+          currentIndex: currentIndex,
+          onTap: (bottomIndex) {
+            setState(() {
+              currentIndex = bottomIndex;
+            });
+          },
+          items: [
+            SalomonBottomBarItem(
+              icon: Icon(CupertinoIcons.house_fill, size: 25.sp),
+              title: Text("الرئيسيه"),
+              selectedColor: AppColors.white,
             ),
-            border: Border.all(
-              color: Colors.white, // لون الإطار
-              width: 0, // سماكة الإطار
+            SalomonBottomBarItem(
+              icon: Icon(CupertinoIcons.heart, size: 25.sp),
+              title: Text("المفضله"),
+              selectedColor: AppColors.white,
             ),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
+            SalomonBottomBarItem(
+              icon: Icon(CupertinoIcons.bag, size: 25.sp),
+              title: Text("السله"),
+              selectedColor: AppColors.white,
             ),
-          ),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.transparent, // لتجنب تأثير اللون الافتراضي
-            currentIndex: currentIndex,
-            onTap: (bottomIndex) {
-              setState(() {
-                currentIndex = bottomIndex;
-              });
-            },
-            selectedItemColor: Colors.white, // لون العنصر النشط
-            unselectedItemColor: Colors.white.withOpacity(0.7), // لون العنصر غير النشط
-            iconSize: 25.sp,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.house_fill, size: 25.sp),
-                label: "الرئيسيه",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.heart, size: 25.sp),
-                label: 'المفضله',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.bag, size: 25.sp),
-                label: 'السله',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings, size: 25.sp),
-                label: 'الاعدادات',
-              ),
-            ],
-          ),
+            SalomonBottomBarItem(
+              icon: Icon(Icons.settings, size: 25.sp),
+              title: Text("الاعدادات"),
+              selectedColor: AppColors.white,
+            ),
+          ],
         ),
       ),
+    ),
+
+
     );
   }
 }

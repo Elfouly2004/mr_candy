@@ -62,26 +62,39 @@ class _ProductsGridState extends State<ProductsGrid> {
     }
     else if (deviceHeight > 850) {
       // الأجهزة الكبيرة
-      contanierheight=200;
-      contanierwidth=153;
-      imgheight=160;
-      imgwidth=200;
+      contanierheight=150;
+      contanierwidth=150;
+      imgheight=130;
+      imgwidth=140;
       container2=25;
       space=95;
       iconsize=15;
       radius=15;
 
     }
-    else if (deviceHeight > 750) {
+    else if (deviceHeight >= 800) {
+      // الأجهزة المتوسطة
+      contanierheight=140;
+      contanierwidth=140;
+      imgheight=120;
+      imgwidth=130;
+      container2=30;
+      space=75;
+      iconsize=15;
+      radius=15;
+
+
+
+    }    else if (deviceHeight > 750) {
       // الأجهزة المتوسطة
       contanierheight=160;
       contanierwidth=140;
       imgheight=160;
       imgwidth=200;
-      container2=25;
-      space=85;
+      container2=30;
+      space=80;
       iconsize=15;
-      radius=20;
+      radius=15;
 
 
 
@@ -114,7 +127,6 @@ class _ProductsGridState extends State<ProductsGrid> {
 
 
     }
-
 
 
 

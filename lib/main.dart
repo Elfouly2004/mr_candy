@@ -18,20 +18,17 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
 
   runApp(
-    DevicePreview(
-      enabled: true, // قم بتعيين `false` عند إصدار التطبيق
-      builder: (context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => ProductsCubit()..fetchproducts()),
-          BlocProvider<LoginCubit>(
-            create: (context) => LoginCubit(LoginRepoImplementation()),
-          ),
-          BlocProvider<GreateAccountCubit>(
-            create: (context) => GreateAccountCubit(GreateAccountImplementation()),
-          ),
-        ],
-        child: const MyApp(),
-      ),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ProductsCubit()..fetchproducts()),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(LoginRepoImplementation()),
+        ),
+        BlocProvider<GreateAccountCubit>(
+          create: (context) => GreateAccountCubit(GreateAccountImplementation()),
+        ),
+      ],
+      child: const MyApp(),
     ),
   );
 }

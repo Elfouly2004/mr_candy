@@ -48,11 +48,18 @@ class _BannerCarouselState extends State<BannerCarousel> {
       height2 = 80;
       dotHeight= 8;
       dotWidth=8;
+    } else if (deviceHeight >= 800) {
+
+      height = 160;
+      width = 300;
+      height2 = 80;
+      dotHeight= 8;
+      dotWidth=8;
     } else if (deviceHeight > 750) {
 
-      height = 180;
+      height = 160;
       width = 300;
-      height2 = 90;
+      height2 = 80;
       dotHeight= 8;
       dotWidth=8;
     } else if (deviceHeight > 700) {

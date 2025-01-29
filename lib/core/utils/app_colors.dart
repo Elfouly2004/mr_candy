@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color white = Color(0xffFFFFFF);
   static const Color black  = Color(0xff000000);
+  static const Color bottomNavbar  = Color(0xff1A48BF);
   static const gradient1  = Color(0xff4309CE);
   static const gradient2  = Color(0xff811BC3);
   static const Buttongradient1  = Color(0xff0A41CD);

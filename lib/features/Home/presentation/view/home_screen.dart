@@ -32,12 +32,15 @@ class HomeScreen extends StatelessWidget {
 
     }else if (deviceHeight > 850) {
 
-      height = 130;
+      height = 140;
 
-    }
-    else if (deviceHeight > 750) {
+    }else if(deviceHeight >= 800){
 
-      height = 180;
+      height = 120;
+
+    }else if (deviceHeight > 750) {
+
+      height = 120;
 
     }
     else if (deviceHeight > 700) {

@@ -42,17 +42,23 @@ class HomePage extends StatelessWidget {
 
     } else if (deviceHeight > 850) {
       // الأجهزة الكبيرة
-      expandedFlex = 5;
-      expandedFlex2 = 6;
-      height = 120;
+      expandedFlex = 6;
+      expandedFlex2 = 5;
+      height = 110;
       height2 = 20;
     }
-    else if (deviceHeight > 750) {
+    else if (deviceHeight >= 800) {
       // الأجهزة المتوسطة
-      expandedFlex = 3;
+      expandedFlex = 4;
       expandedFlex2 = 4;
-      height = 150;
-      height2 = 25;
+      height = 100;
+      height2 = 20;
+    }else if (deviceHeight > 750) {
+      // الأجهزة المتوسطة
+      expandedFlex = 4;
+      expandedFlex2 = 4;
+      height = 100;
+      height2 = 20;
     }
     else if (deviceHeight > 700) {
       // الأجهزة الصغيرة
@@ -94,6 +100,7 @@ class HomePage extends StatelessWidget {
               flex: expandedFlex,
               child: const CategoriesGrid(),
             ),
+           const SizedBox(height: 10,),
 
             Align(
               alignment: Alignment.centerRight,
