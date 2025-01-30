@@ -1,27 +1,7 @@
-// // banners_model.dart
-// class BannersModel {
-//   final String urlImage;
-//   final int id;
-//   final String? category;
-//   final String? product;
-//
-//   BannersModel({required this.urlImage,
-//     required this.id,
-//     required this.category,
-//     required this.product});
-//
-// Map<String, dynamic> toJson() {
-//     return {
-//       "id": id,
-//       "image":urlImage,
-//       "category":category,
-//       "product":product
-//     };
-//   }
-// }
 
+import 'package:equatable/equatable.dart';
 
-class BannersModel {
+class BannersModel extends Equatable {
   final String urlImage;
   final int id;
   final Map<String, dynamic>? category; // Update to handle category
@@ -53,4 +33,9 @@ class BannersModel {
       "product": product,
     };
   }
+
+  @override
+  // TODO: implement props
+  @override
+  List<Object?> get props => [urlImage, id, category, product];
 }

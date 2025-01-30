@@ -15,106 +15,103 @@ class CartsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CartsCubit>(
-      create: (context) => CartsCubit()..fetchCarts(),
-      child: Scaffold(
-        body: Column(
-          children: [
-            // Custom AppBar widget
-            SizedBox(
-              height: 111.h,
-              child: const CustomAppbar(title: AppTexts.bag),
-            ),
+    return Scaffold(
+      body: Column(
+        children: [
+          // Custom AppBar widget
+          SizedBox(
+            height: 111.h,
+            child: const CustomAppbar(title: AppTexts.bag),
+          ),
 
-            Expanded(
-              child: BlocBuilder<CartsCubit, CartsState>(
-                builder: (context, state) {
-                  final cubit = CartsCubit.get(context); // للحصول على الكيوبت
+          Expanded(
+            child: BlocBuilder<CartsCubit, CartsState>(
+              builder: (context, state) {
+                final cubit = CartsCubit.get(context); // للحصول على الكيوبت
 
-                  if (state is CartsLoadingState) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is CartsFailureState) {
-                    return Center(
-                      child: Text(
-                        state.errorMessage,
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    );
-                  } else if (state is CartsSuccessState) {
-                    final cartItems = state.cartsList;
+                if (state is CartsLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is CartsFailureState) {
+                  return Center(
+                    child: Text(
+                      state.errorMessage,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  );
+                } else if (state is CartsSuccessState) {
+                  final cartItems = state.cartsList;
 
-                    if (cartItems.isEmpty) {
-                      return const Center(child: Text("No items in your cart"));
-                    }
-
-                    return Column(
-                      children: [
-                        // ListView of cart items
-                        Expanded(
-                          flex:10,
-                          child: Lstview(
-                            itemCount: cartItems.length,
-                            cartitems: cartItems,
-                          ),
-                        ),
-
-                        // Total and Confirm Section
-                        Expanded(
-                          flex:2,
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight, // يجعل النص في يمين الشاشة
-                                child: Text(
-                                  "${AppTexts.Total} ${cubit.totalprice} ج ",
-                                  style: GoogleFonts.cairo(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.Appbar3,
-                                  ),
-                                ),
-                              ),
-
-
-                              SizedBox(height: 20.h),
-
-
-                              ElevatedButton(
-                                onPressed: () {
-                                  // منطق التأكيد
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 12.h,
-                                    horizontal: 30.w,
-                                  ),
-                                  backgroundColor: AppColors.Appbar3,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                ),
-                                child: Text(
-                                  "تأكيد",
-                                  style: GoogleFonts.cairo(
-                                    fontSize: 16.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
+                  if (cartItems.isEmpty) {
+                    return const Center(child: Text("No items in your cart"));
                   }
 
-                  return const Center(child: Text("Something went wrong!"));
-                },
-              ),
+                  return Column(
+                    children: [
+                      // ListView of cart items
+                      Expanded(
+                        flex:10,
+                        child: Lstview(
+                          itemCount: cartItems.length,
+                          cartitems: cartItems,
+                        ),
+                      ),
+
+                      // Total and Confirm Section
+                      Expanded(
+                        flex:2,
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerRight, // يجعل النص في يمين الشاشة
+                              child: Text(
+                                "${AppTexts.Total} ${cubit.totalprice} ج ",
+                                style: GoogleFonts.cairo(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.Appbar3,
+                                ),
+                              ),
+                            ),
+
+
+                            SizedBox(height: 20.h),
+
+
+                            ElevatedButton(
+                              onPressed: () {
+                                // منطق التأكيد
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 12.h,
+                                  horizontal: 30.w,
+                                ),
+                                backgroundColor: AppColors.Appbar3,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                              ),
+                              child: Text(
+                                "تأكيد",
+                                style: GoogleFonts.cairo(
+                                  fontSize: 16.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+
+                return const Center(child: Text("Something went wrong!"));
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

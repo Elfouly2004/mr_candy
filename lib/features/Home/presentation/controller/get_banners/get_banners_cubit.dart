@@ -1,3 +1,4 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/model/banners_model.dart';
 import '../../../data/repo/home_repo_implemetation.dart';
@@ -8,10 +9,7 @@ class BannersCubit extends Cubit<BannersStates> {
 
   final HomeRepoImplementation homeRepo = HomeRepoImplementation();
   List<BannersModel> banners = [];
-
-  // Static method for accessing the cubit instance easily
   static BannersCubit get(context) => BlocProvider.of(context);
-
   Future<void> fetchBanners() async {
     emit(BannersLoadingState());
 
@@ -20,11 +18,15 @@ class BannersCubit extends Cubit<BannersStates> {
       print("Error fetching banners: ${failure.message}");
       emit(BannersFailureState(errorMessage: failure.message));
     }, (data) {
-      banners = data;
-      print("Fetched banners: $banners");  // Debug output
-      emit(BannersSuccessState());
-    },
-    );
+      if (data.isNotEmpty) { // ✅ تأكد أن البيانات ليست فارغة
+        banners = data;
+        print("Fetched banners: $banners");  // Debug output
+        emit(BannersSuccessState());
+      } else {
+        emit(BannersFailureState(errorMessage: "No banners found"));
+      }
+    });
   }
+
 
 }

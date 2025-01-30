@@ -1,7 +1,12 @@
 
+import 'package:equatable/equatable.dart';
+
 import '../../../Home/data/model/product_model.dart';
 
-abstract class FavoritesState {}
+abstract class FavoritesState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class FavoritesInitialState extends FavoritesState {}
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mrcandy/features/Category/presentation/view/widgets/cystom_txt.dart';
@@ -54,14 +55,13 @@ class CategoryDetailsScreen extends StatelessWidget {
                         decoration: const BoxDecoration(
 
                         ),
-                        child: Image.network(
-                          product.images[index],
-
+                        child: CachedNetworkImage(
+                          imageUrl: product.images[index], // رابط الصورة
                           fit: BoxFit.fill,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(Icons.broken_image, size: 50);
-                          },
-                        ),
+                          // placeholder: (context, url) => const Center(child: CircularProgressIndicator()), // مؤشر التحميل
+                          errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 50), // في حالة فشل تحميل الصورة
+                        )
+
                       ),
                     );
                   },
@@ -110,12 +110,7 @@ class CategoryDetailsScreen extends StatelessWidget {
 
             ),
 
-            //
-            // Divider(
-            //   color: Colors.grey,            //   thickness: 1.0,
-            //   indent: 16.0,
-            //   endIndent: 16.0,
-            // ),
+
             const SizedBox(height: 10),
 
             Text(
@@ -125,6 +120,8 @@ class CategoryDetailsScreen extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
+              maxLines: 7, // تحديد الحد الأقصى لعدد الأسطر
+              overflow: TextOverflow.ellipsis,
             ),
 
             const SizedBox(height: 10),

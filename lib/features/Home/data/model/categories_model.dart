@@ -1,5 +1,7 @@
 // Categories_model.dart
-class CategoriesModel {
+import 'package:equatable/equatable.dart';
+
+class CategoriesModel extends Equatable {
   final int id;
   final String urlImage;
 
@@ -20,4 +22,7 @@ class CategoriesModel {
       "name":name,
     };
   }
+  @override
+  List<Object?> get props => [id, urlImage, name];
+
 }

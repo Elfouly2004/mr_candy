@@ -12,19 +12,22 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   // Static method for accessing the cubit instance easily
   static CategoriesCubit get(context) => BlocProvider.of(context);
 
-  Future<void> fetchBanners() async {
+  Future<void> fetchCategories() async {
     emit(CategoriesLoadingState());
 
     final result = await homeRepo.get_categories();
     result.fold((failure) {
-      print("Error fetching banners: ${failure.message}");
+      print("Error fetching categories: ${failure.message}");
       emit(CategoriesFailureState(errorMessage: failure.message));
     }, (data) {
-      categories_lst = data;
-      print("Fetched banners: $categories_lst");  // Debug output
-      emit(CategoriesSuccessState());
-    },
-    );
+      if (data.isNotEmpty) {  // ✅ التحقق من البيانات قبل التحديث
+        categories_lst = data;
+        print("Fetched categories: $categories_lst");
+        emit(CategoriesSuccessState());
+      } else {
+        emit(CategoriesFailureState(errorMessage: "No categories found"));
+      }
+    });
   }
 
 }

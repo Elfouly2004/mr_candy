@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,11 +78,13 @@ class Lstview extends StatelessWidget {
                       // Product Image
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
-                        child: Image.network(
-                          item.product.image,
+                        child: CachedNetworkImage(
+                          imageUrl: item.product.image,
                           height: 100.h,
                           width: 80.w,
                           fit: BoxFit.fitHeight,
+                          // placeholder: (context, url) => const Center(child: CircularProgressIndicator()), // عرض مؤشر تحميل أثناء التحميل
+                          errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 50, color: Colors.red), // عرض أيقونة عند فشل التحميل
                         ),
                       ),
 

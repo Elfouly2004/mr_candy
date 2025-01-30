@@ -1,12 +1,13 @@
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:mrcandy/features/Category/presentation/controller/catgories%20sections%20%20cubit/catgories_sections%20_state.dart';
 import 'package:mrcandy/features/Home/data/model/product_model.dart';
 import 'package:mrcandy/features/carts/data/model/cart_model.dart';
 
 import '../../../data/repo/catgories_repo_implementation.dart';
 
-part 'catgories_sections _state.dart';
 
 class CatgoriesSectionsCubit extends Cubit<CatgoriesSectionsState> {
   CatgoriesSectionsCubit() : super(CatgoriesSectionsInitial());

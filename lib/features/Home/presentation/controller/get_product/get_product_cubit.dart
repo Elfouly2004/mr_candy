@@ -9,33 +9,54 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   final HomeRepoImplementation homeRepo = HomeRepoImplementation();
 
-  // قائمة المنتجات التي سيتم تعبئتها بالبيانات بعد جلبها
+
   List<ProductModel> productList = [];
   List<CartItemModel> cartsList = [];
 
 
-  // int index1 =0;
-  //  Map<int,List<ProductModel>> map_forproducts={};
 
 
   static ProductsCubit get(context) => BlocProvider.of(context);
 
+  // Future<void> fetchproducts() async {
+  //   emit(ProductsLoadingState());
+  //
+  //   final result = await homeRepo.get_product();
+  //   result.fold((failure) {
+  //     print("Error fetching products: ${failure.message}");
+  //     emit(ProductsFailureState(errorMessage: failure.message));
+  //   }, (right) {
+  //     productList = right;
+  //
+  //     print("Fetched products: $productList");  // Debug output
+  //     emit(ProductsSuccessState(productList));
+  //   });
+  // }
+
+
+
   Future<void> fetchproducts() async {
+    if (productList.isNotEmpty) {
+      emit(ProductsSuccessState(List.from(productList)));
+      return;
+    }
+
     emit(ProductsLoadingState());
 
     final result = await homeRepo.get_product();
-    result.fold((failure) {
-      print("Error fetching products: ${failure.message}");
-      emit(ProductsFailureState(errorMessage: failure.message));
-    }, (right) {
-      productList = right;
-      // map_forproducts.addAll({
-      //   index1:productList
-      // });
-      print("Fetched products: $productList");  // Debug output
-      emit(ProductsSuccessState(productList));
-    });
+    result.fold(
+          (failure) {
+        print("Error fetching products: ${failure.message}");
+        emit(ProductsFailureState(errorMessage: failure.message));
+      },
+          (right) {
+        productList = right;
+        print("Fetched products: $productList");
+        emit(ProductsSuccessState(List.from(productList)));
+      },
+    );
   }
+
 
 
   Future<void> addFavorite(context, int index) async {

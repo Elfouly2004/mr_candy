@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import '../../../Home/data/model/product_model.dart';
 
-class CartItemModel {
+class CartItemModel extends Equatable {
   final int id;
   final int quantity;
   final ProductModel product;
@@ -13,9 +14,9 @@ class CartItemModel {
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
-      id: json['id'] ?? 0, // Default to 0 if null
-      quantity: json['quantity'] ?? 0, // Default to 0 if null
-      product: ProductModel.fromJson(json['product'] ?? {}), // Default to empty object if null
+      id: json['id'] ?? 0,
+      quantity: json['quantity'] ?? 0,
+      product: ProductModel.fromJson(json['product'] ?? {}),
     );
   }
 
@@ -26,4 +27,7 @@ class CartItemModel {
       'product': product.toJson(),
     };
   }
+
+  @override
+  List<Object?> get props => [id, quantity, product];
 }

@@ -1,6 +1,11 @@
+import 'package:equatable/equatable.dart';
+
 import '../../data/model/cart_model.dart';
 
-abstract class CartsState {}
+abstract class CartsState extends Equatable{
+  @override
+  List<Object?> get props => [];
+}
 
 class CartsInitialState extends CartsState {}
 

@@ -7,7 +7,11 @@ import 'package:mrcandy/features/Greate_account/data/repo/Greate_account_impelem
 import 'package:mrcandy/features/login/data/repo/login_repo_impelemntation.dart';
 
 import 'features/Greate_account/presentation/controller/greate_account_cubit.dart';
+import 'features/Home/presentation/controller/get_banners/get_banners_cubit.dart';
+import 'features/Home/presentation/controller/get_categories/get_categories_cubit.dart';
 import 'features/Home/presentation/controller/get_product/get_product_cubit.dart';
+import 'features/carts/presentation/controller/carts_cubit.dart';
+import 'features/favorite/presentation/controller/fav_cubit.dart';
 import 'features/login/presentation/controller/login_cubit.dart';
 import 'features/splash_screen/views/splash_screen.dart';
 
@@ -21,9 +25,21 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ProductsCubit()..fetchproducts()),
+
+        BlocProvider(create: (_)=> BannersCubit()..fetchBanners()),
+
+
+        BlocProvider( create: (_) => CategoriesCubit()..fetchCategories(),),
+
+        BlocProvider(  create: (context) => FavoritesCubit()..fetchFavorites(),),
+
+        BlocProvider(  create: (context) => CartsCubit()..fetchCarts(),),
+        BlocProvider(  create: (context) => CartsCubit()..fetchCarts(),),
+
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(LoginRepoImplementation()),
         ),
+
         BlocProvider<GreateAccountCubit>(
           create: (context) => GreateAccountCubit(GreateAccountImplementation()),
         ),

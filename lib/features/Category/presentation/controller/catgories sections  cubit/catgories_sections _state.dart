@@ -1,7 +1,10 @@
-part of 'catgories_sections _cubit.dart';
 
-@immutable
-sealed class CatgoriesSectionsState {}
+import 'package:equatable/equatable.dart';
+
+abstract class CatgoriesSectionsState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 final class CatgoriesSectionsInitial extends CatgoriesSectionsState {}
 class CategoriesLoadingState extends CatgoriesSectionsState { }
